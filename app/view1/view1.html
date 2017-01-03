@@ -1,8 +1,7 @@
-
-<jr-file-chooser />
-
-<p>This is the partial for view 1.</p>
-
-<!--
-<input type="file" ng-change="convertXmlToJson()"/>
--->
+<div ng-controller="View1Ctrl" class="container">
+    <input type="file" on-read-file="showContent($content)" />
+    <!--<div ng-if="content">
+        <h2>File content is:</h2>
+        <pre>{{ content }}</pre>
+    </div>-->
+</div>

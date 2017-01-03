@@ -1,8 +1,41 @@
-/**
- * Created by danie on 25/12/2016.
- */
+angular
+    .module('myApp.directives')
+    .directive('onReadFile', function ($parse) {
+        return {
+            restrict: 'A',
+            scope: {
+                onReadFile : "&"
+            },
+            link: function(scope, element, attrs) {
+                element.on('change', function(e) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        scope.$apply(function() {
+                            scope.onReadFile({$content:e.target.result});
+                        });
+                    };
+                    reader.readAsText((e.srcElement || e.target).files[0]);
+                });
+            }
+        };
+    });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 angular
     .module('myApp.directives')
     .directive('jrFileChooser', ['jrFileReader', function (jrFileReader){
@@ -27,3 +60,4 @@ angular
             }
         };
 }]);
+*/

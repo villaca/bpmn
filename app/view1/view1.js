@@ -9,28 +9,13 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
   });
 }])
 
-.controller('View1Ctrl', [ 'ReadableTask',function(ReadableTask) {
+.controller('View1Ctrl', function ($scope) {
+    $scope.showContent = function(content){
+        $scope.content = content;
 
-    var task = new ReadableTask('josafá', 'inferno', 'the paaaaain ...');
+        var x2js = new X2JS();
+        var json = x2js.xml_str2json(content);
 
-    console.log(task);
-}])
-
-
-/*.directive('jrFileChooser', ['jrFileReader', function (jrFileReader) {
-    return{
-        replace: true,
-        template: '<input type="file"/>',
-        link: function($scope, element, attrs){
-                element.on('change', function () {
-
-                    jrFileReader.readAsText($scope.file,$scope);
-                    var x2js = new X2JS();
-                    var json = x2js.xml_str2json( data );
-                    console.log("PORRAAAAAAAAAA");
-                    console.log(json);
-                });
-        }
+        console.log(json);
     };
-}]);*/
-
+});
