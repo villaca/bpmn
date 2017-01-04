@@ -11,8 +11,17 @@ angular
 
         var task = [];
 
-        function ReadableProcess(task) {
-            this.task = task;
+        ReadableProcess.prototype.add = function (newTask) {
+            task.push(newTask);
+        }
+
+        ReadableProcess.prototype.get = function () {
+            return task;
+        }
+
+
+        function ReadableProcess() {
+
         }
 
         return ReadableProcess;

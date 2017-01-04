@@ -9,13 +9,47 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
   });
 }])
 
-.controller('View1Ctrl', function ($scope) {
+.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask) {
     $scope.showContent = function(content){
         $scope.content = content;
 
         var x2js = new X2JS();
         var json = x2js.xml_str2json(content);
 
-        console.log(json);
+        console.log(json.Package.WorkflowProcesses/*.WorkflowProcess.Activities*/);
+
+        if( Array.isArray(json.Package.WorkflowProcesses.WorkflowProcess) ){
+            var workflow = json.Package.WorkflowProcesses.WorkflowProcess[1];
+        }
+        else {
+            var workflow = json.Package.WorkflowProcesses.WorkflowProcess;
+        }
+
+        console.log(workflow);
+
+        var readableProcess = new ReadableProcess();
+
+        if(workflow.hasOwnProperty('Activities')){
+            alert('it´s alive');
+
+            for(let activity of workflow.Activities.Activity){
+                console.log(activity.Performer, activity._Name);
+                let readableTask = new ReadableTask(activity.Performer, activity._Name);
+                readableProcess.add(readableTask);
+            }
+
+            console.log(readableProcess.get());
+        }
+        else if(workflow.hasOwnProperty('ActivitySets')){
+            alert('master of all');
+
+            for(let activity of workflow.Activities.Activity){
+                let readableTask = new ReadableTask();
+                readableProcess.add(readableTask);
+            }
+
+            console.log(readableProcess.get());
+
+        }
     };
 });
