@@ -1,7 +1,40 @@
 <div ng-controller="View1Ctrl" class="container">
     <input type="file" on-read-file="showContent($content)" />
-    <!--<div ng-if="content">
+    <div ng-if="readableProcess">
         <h2>File content is:</h2>
-        <pre>{{ content }}</pre>
-    </div>-->
+        <div ng-repeat="readableTask in readableProcess.get()">
+            <h3>Task {{$index + 1}} </h3>
+
+
+            <span>Task actor:</span>
+            <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }} </span>
+            <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+            <button onclick="putActor(readableTask)">+</button>
+
+            <br/>
+
+            <span>Task Definition :</span>
+            <span>{{ readableTask.getDefinition() }}</span>
+
+            <br/>
+
+            <span>Comments:</span>
+            <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ actor }} </span>
+            <span ng-if="!readableTask.getComment(0)"> No comments! </span>
+            <button>+</button>
+
+            <br/>
+            <br/>
+
+            <button>Remove Task</button>
+
+            <br/>
+
+            <span>----------------------------------------------------------------------------------------------------------------------------------------</span>
+
+
+
+            <br/>
+        </div>
+    </div>
 </div>

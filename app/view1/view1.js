@@ -11,7 +11,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
 
 .controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask) {
     $scope.showContent = function(content){
-        $scope.content = content;
+        //$scope.content = content;
 
         var x2js = new X2JS();
         var json = x2js.xml_str2json(content);
@@ -33,12 +33,11 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
             alert('it´s alive');
 
             for(let activity of workflow.Activities.Activity){
-                console.log(activity.Performer, activity._Name);
                 let readableTask = new ReadableTask(activity.Performer, activity._Name);
                 readableProcess.add(readableTask);
             }
-
             console.log(readableProcess.get());
+            $scope.readableProcess = readableProcess;
         }
         else if(workflow.hasOwnProperty('ActivitySets')){
             alert('master of all');
@@ -51,5 +50,12 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
             console.log(readableProcess.get());
 
         }
+    };
+
+    $scope.putActor = function(readableTask){
+        console.log(readableTask);
+        readableTask.addActor("José");
+        console.log(readableTask);
+
     };
 });

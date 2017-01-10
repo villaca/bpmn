@@ -9,19 +9,22 @@ angular
     .module('myApp.factories')
     .factory('ReadableProcess', function () {
 
-        var task = [];
+        //var task = [];
 
         ReadableProcess.prototype.add = function (newTask) {
-            task.push(newTask);
+            this.task.push(newTask);
         }
 
         ReadableProcess.prototype.get = function () {
-            return task;
+            return this.task;
         }
 
+        ReadableProcess.prototype.getTask = function (index) {
+            return this.task[index];
+        }
 
         function ReadableProcess() {
-
+            this.task = [];
         }
 
         return ReadableProcess;
