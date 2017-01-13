@@ -12,7 +12,11 @@ angular
         //var task = [];
 
         ReadableProcess.prototype.add = function (newTask) {
-            this.task.push(newTask);
+            let index = this.task.indexOf(newTask);
+
+            if (index == -1) {
+                this.task.push(newTask);
+            }
         }
 
         ReadableProcess.prototype.get = function () {
@@ -21,6 +25,14 @@ angular
 
         ReadableProcess.prototype.getTask = function (index) {
             return this.task[index];
+        }
+
+        ReadableProcess.prototype.deleteTask = function (readableTask) {
+            let index = this.task.indexOf(readableTask);
+
+            if (index > -1) {
+                this.task.splice(index, 1);
+            }
         }
 
         function ReadableProcess() {

@@ -16,11 +16,32 @@ angular
 
 
         ReadableTask.prototype.addActor = function (newActor){
-            this.actor.push(newActor);
+            let index = this.actor.indexOf(newActor);
+
+            if(index == -1){
+                this.actor.push(newActor);
+            }
+            else{
+                alert("This actor already exists!")
+            }
+
+            if(typeof this.actor[0] == 'undefined'){
+                this.actor.splice(0, 1);
+            }
         }
 
         ReadableTask.prototype.addComment = function (newComment){
-            this.comment.push(newComment);
+            let index = this.actor.indexOf(newComment);
+
+            if(index == -1){
+                this.comment.push(newComment);
+            }
+            else{
+                alert("This comment already exists!")
+            }
+            if(typeof this.comment[0] == 'undefined'){
+                this.comment.splice(0, 1);
+            }
         }
 
         ReadableTask.prototype.addDefinition = function (newTaskDefinition){
@@ -43,6 +64,13 @@ angular
 
         ReadableTask.prototype.getDefinition = function () {
             return this.taskDefinition;
+        }
+
+        ReadableTask.prototype.getNumberOfActors = function () {
+            return this.actor.length;
+        }
+        ReadableTask.prototype.getNumberOfComments = function () {
+            return this.comment.length;
         }
 
 

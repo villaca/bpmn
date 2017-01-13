@@ -30,7 +30,6 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
         var readableProcess = new ReadableProcess();
 
         if(workflow.hasOwnProperty('Activities')){
-            alert('it´s alive');
 
             for(let activity of workflow.Activities.Activity){
                 let readableTask = new ReadableTask(activity.Performer, activity._Name);
@@ -52,10 +51,38 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories'])
         }
     };
 
-    $scope.putActor = function(readableTask){
-        console.log(readableTask);
-        readableTask.addActor("José");
-        console.log(readableTask);
+    $scope.showModalActor = false;
+    $scope.showModalComment = false;
 
+
+    $scope.hide = function(m, showModalActor){
+        if(m === 1){
+            $scope.showModalActor = false;
+            showModalActor = false;
+        }
+        else{
+            $scope.showModalComment= false;
+        }
+    }
+
+    $scope.putActor = function(readableTask){
+        readableTask.addActor("José");
     };
+
+    $scope.putComment = function(readableTask){
+        readableTask.addComment("José");
+    };
+
+    $scope.removeTask = function(readableProcess, readableTask){
+        readableProcess.deleteTask(readableTask);
+    };
+
+
+    $scope.modalActorShown = function(){
+        console.log('model one shown');
+    }
+
+    $scope.modalActorHide = function(){
+        console.log('model one hidden');
+    }
 });

@@ -1,40 +1,73 @@
 <div ng-controller="View1Ctrl" class="container">
     <input type="file" on-read-file="showContent($content)" />
-    <div ng-if="readableProcess">
+    <div class="row " ng-if="readableProcess">
         <h2>File content is:</h2>
-        <div ng-repeat="readableTask in readableProcess.get()">
-            <h3>Task {{$index + 1}} </h3>
+        <div class="col-md-4">
+            <div class="well well-lg " ng-repeat="readableTask in readableProcess.get()">
+                <h3>Task {{$index + 1}} </h3>
 
 
-            <span>Task actor:</span>
-            <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }} </span>
-            <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
-            <button onclick="putActor(readableTask)">+</button>
-
-            <br/>
-
-            <span>Task Definition :</span>
-            <span>{{ readableTask.getDefinition() }}</span>
-
-            <br/>
-
-            <span>Comments:</span>
-            <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ actor }} </span>
-            <span ng-if="!readableTask.getComment(0)"> No comments! </span>
-            <button>+</button>
-
-            <br/>
-            <br/>
-
-            <button>Remove Task</button>
-
-            <br/>
-
-            <span>----------------------------------------------------------------------------------------------------------------------------------------</span>
+                <span>Task actor:</span>
+                <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }},  </span>
+                <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+                <!--
+                <button class="btn btn-default" ng-click="putActor(readableTask)">+</button>
+                -->
+                <button class="btn btn-primary" ng-click="showModalActor = true">+</button>
 
 
+                <modal visible="showModalActor" on-sown="modalActorShown()" on-hide="modalActorHide()">
+                    <modal-header title="Modal Title 1"></modal-header>
+                    <modal-body>
+                        <input type="text" ng-model="showModalActor">
+                    </modal-body>
+                    <modal-footer>
+                        <button class="btn btn-primary"  ng-click="putActor(readableTask); showModalActor = false">Save</button>
+                    </modal-footer>
+                </modal>
 
-            <br/>
+                <br/>
+
+                <span>Task Definition :</span>
+                <span>{{ readableTask.getDefinition() }}</span>
+
+                <br/>
+
+                <span>Comments:</span>
+                <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ comment }}, </span>
+                <span ng-if="!readableTask.getComment(0)"> No comments! </span>
+                <button class="btn btn-default" ng-click="putComment(readableTask)">+</button>
+
+                <br/>
+                <br/>
+
+                <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">Remove Task</button>
+
+
+
+
+                <br/>
+
+            </div>
+
         </div>
+        <div class="well well-lg col-md-8">Will be the image area</div>
     </div>
 </div>
+
+<button class="btn btn-primary" ng-click="showModalActor = true">Show Modal</button>
+<button class="btn btn-primary" ng-click="showModalComment = true">Show Static Modal</button>
+
+
+
+
+
+<modal visible="showModal2" backdrop="static">
+    <modal-header title="Modal Titel 2"></modal-header>
+    <modal-body>
+        <h3>This is modal body</h3>
+    </modal-body>
+    <modal-footer>
+        <button class="btn btn-primary" ng-click="hide(2)">Save</button>
+    </modal-footer>
+</modal>
