@@ -10,21 +10,25 @@
                 <span>Task actor:</span>
                 <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }},  </span>
                 <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
-                <!--
-                <button class="btn btn-default" ng-click="putActor(readableTask)">+</button>
-                -->
-                <button class="btn btn-primary" ng-click="showModalActor = true">+</button>
+
+                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                    <button class="btn btn-default" ng-click="open(readableTask)">+</button>
+
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <input type="text" ng-model="newActor">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('actor')">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
 
 
-                <modal visible="showModalActor" on-sown="modalActorShown()" on-hide="modalActorHide()">
-                    <modal-header title="Modal Title 1"></modal-header>
-                    <modal-body>
-                        <input type="text" ng-model="showModalActor">
-                    </modal-body>
-                    <modal-footer>
-                        <button class="btn btn-primary"  ng-click="putActor(readableTask); showModalActor = false">Save</button>
-                    </modal-footer>
-                </modal>
 
                 <br/>
 
@@ -36,7 +40,23 @@
                 <span>Comments:</span>
                 <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ comment }}, </span>
                 <span ng-if="!readableTask.getComment(0)"> No comments! </span>
-                <button class="btn btn-default" ng-click="putComment(readableTask)">+</button>
+
+                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                    <button class="btn btn-default" ng-click="openComments(readableTask)">+</button>
+
+                    <script type="text/ng-template" id="myModalContentComments.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modal-title-comment">I'm a modal!</h3>
+                        </div>
+                        <div class="modal-body" id="modal-body-comment">
+                            <input type="text" ng-model="newComment">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('comment')">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
 
                 <br/>
                 <br/>
@@ -55,19 +75,5 @@
     </div>
 </div>
 
-<button class="btn btn-primary" ng-click="showModalActor = true">Show Modal</button>
-<button class="btn btn-primary" ng-click="showModalComment = true">Show Static Modal</button>
 
 
-
-
-
-<modal visible="showModal2" backdrop="static">
-    <modal-header title="Modal Titel 2"></modal-header>
-    <modal-body>
-        <h3>This is modal body</h3>
-    </modal-body>
-    <modal-footer>
-        <button class="btn btn-primary" ng-click="hide(2)">Save</button>
-    </modal-footer>
-</modal>
