@@ -9,12 +9,6 @@ angular
     .module('myApp.factories')
     .factory('ReadableTask', function () {
 
-        //var actor = [];
-        //var taskDefinition;
-        //var comment = [];
-
-
-
         ReadableTask.prototype.addActor = function (newActor){
             let index = this.actor.indexOf(newActor);
 

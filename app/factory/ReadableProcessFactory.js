@@ -9,34 +9,64 @@ angular
     .module('myApp.factories')
     .factory('ReadableProcess', function () {
 
-        //var task = [];
-
-        ReadableProcess.prototype.add = function (newTask) {
-            let index = this.task.indexOf(newTask);
+        ReadableProcess.prototype.addTask = function (newTask) {
+            let index = this.tasks.indexOf(newTask);
 
             if (index == -1) {
-                this.task.push(newTask);
+                this.tasks.push(newTask);
+
+                for (let actor of newTask.getAllActor()) {
+                    this.addActor(actor);
+                }
             }
         }
 
-        ReadableProcess.prototype.get = function () {
-            return this.task;
+        ReadableProcess.prototype.getTasks = function () {
+            return this.tasks;
         }
 
         ReadableProcess.prototype.getTask = function (index) {
-            return this.task[index];
+            return this.tasks[index];
+        }
+
+        ReadableProcess.prototype.getDisabledTasks = function () {
+            return this.disabledTasks;
+        }
+
+        ReadableProcess.prototype.getDisabledTask = function (index) {
+            return this.disabledTasks[index];
+        }
+
+        ReadableProcess.prototype.getActors = function () {
+            return this.actors;
+        }
+
+        ReadableProcess.prototype.getActor = function (index) {
+            return this.actors[index];
         }
 
         ReadableProcess.prototype.deleteTask = function (readableTask) {
-            let index = this.task.indexOf(readableTask);
+            let index = this.tasks.indexOf(readableTask);
 
             if (index > -1) {
-                this.task.splice(index, 1);
+                this.disabledTasks.push(this.tasks[index]);
+                this.tasks.splice(index, 1);
+            }
+        }
+
+        ReadableProcess.prototype.addActor = function (newActor) {
+            let index = this.actors.indexOf(newActor);
+
+            if (index == -1) {
+                this.actors.push(newActor);
             }
         }
 
         function ReadableProcess() {
-            this.task = [];
+            this.tasks = [];
+            this.disabledTasks = [];
+            this.actors = [];
+
         }
 
         return ReadableProcess;

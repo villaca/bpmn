@@ -3,3 +3,5 @@ logs/*
 tmp
 .DS_Store
 .idea
+docs.zip
+docs/docs.zip

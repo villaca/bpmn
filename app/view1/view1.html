@@ -1,9 +1,17 @@
 <div ng-controller="View1Ctrl" class="container">
     <input type="file" on-read-file="showContent($content)" />
+
+    <div class="row"  ng-if="readableProcess">
+        <span>Actors: </span>
+        <span ng-repeat="actor in readableProcess.getActors()"> {{ actor }} </span>
+    </div>
+
+
     <div class="row " ng-if="readableProcess">
-        <h2>File content is:</h2>
+        <h1>File content is:</h1>
+
         <div class="col-md-4">
-            <div class="well well-lg " ng-repeat="readableTask in readableProcess.get()">
+            <div class="well well-lg " ng-repeat="readableTask in readableProcess.getTasks()">
                 <h3>Task {{$index + 1}} </h3>
 
 
@@ -72,6 +80,68 @@
 
         </div>
         <div class="well well-lg col-md-8">Will be the image area</div>
+    </div>
+
+    <div class="row" ng-if="readableProcess.getDisabledTask(0)">
+        <div class="col-md-4">
+            <h2>Disabled Activities:</h2>
+
+            <div class="well well-lg " ng-repeat="readableTask in readableProcess.getDisabledTasks()">
+                <h3>Task {{$index + 1}} </h3>
+
+
+                <span>Task actor:</span>
+                <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }},  </span>
+                <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+
+                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                    <button class="btn btn-default" ng-click="open(readableTask)">+</button>
+
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <input type="text" ng-model="newActor">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('actor')">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
+
+
+
+                <br/>
+
+                <span>Task Definition :</span>
+                <span>{{ readableTask.getDefinition() }}</span>
+
+                <br/>
+
+                <span>Comments:</span>
+                <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ comment }}, </span>
+                <span ng-if="!readableTask.getComment(0)"> No comments! </span>
+
+                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                    <button class="btn btn-default" ng-click="openComments(readableTask)">+</button>
+
+                    <script type="text/ng-template" id="myModalContentComments.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modal-title-comment">I'm a modal!</h3>
+                        </div>
+                        <div class="modal-body" id="modal-body-comment">
+                            <input type="text" ng-model="newComment">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('comment')">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

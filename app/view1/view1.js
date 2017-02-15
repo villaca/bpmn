@@ -33,20 +33,19 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
             for(let activity of workflow.Activities.Activity){
                 let readableTask = new ReadableTask(activity.Performer, activity._Name);
-                readableProcess.add(readableTask);
+                readableProcess.addTask(readableTask);
             }
-            console.log(readableProcess.get());
+            console.log(readableProcess.getTasks());
             $scope.readableProcess = readableProcess;
         }
         else if(workflow.hasOwnProperty('ActivitySets')){
-            alert('master of all');
 
             for(let activity of workflow.Activities.Activity){
                 let readableTask = new ReadableTask();
-                readableProcess.add(readableTask);
+                readableProcess.addTask(readableTask);
             }
 
-            console.log(readableProcess.get());
+            console.log(readableProcess.getTasks());
 
         }
     };
