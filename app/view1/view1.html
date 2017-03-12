@@ -4,6 +4,7 @@
     <div class="row"  ng-if="readableProcess">
         <span>Actors: </span>
         <span ng-repeat="actor in readableProcess.getActors()"> {{ actor }} </span>
+
     </div>
 
 
@@ -11,72 +12,57 @@
         <h1>File content is:</h1>
 
         <div class="col-md-4">
-            <div class="well well-lg " ng-repeat="readableTask in readableProcess.getTasks()">
-                <h3>Task {{$index + 1}} </h3>
 
 
-                <span>Task actor:</span>
-                <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()"> {{ actor }},  </span>
-                <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+            <div class="well well-lg">
 
-                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                    <button class="btn btn-default" ng-click="open(readableTask)">+</button>
+                <div ng-repeat="actor in readableProcess.getActors()" class="actor">
+                    <span ng-if="actor == '' "> Actor: No Actors! </span>
+                    <span ng-if="actor != '' "> Actor: {{ actor }} </span>
 
-                    <script type="text/ng-template" id="myModalContent.html">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+
+                    <button class="btn btn-primary pull-right taskToggler" type="button" status="hidden">Show Tasks</button>
+
+                    <div ng-repeat="task in readableProcess.getTasksByActor(actor)" class="tasks">
+
+                        <span>Task Definition :</span>
+                        <span>{{ readableTask.getDefinition() }}</span>
+
+                        <br/>
+
+                        <span>Comments:</span>
+                        <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ comment }}, </span>
+                        <span ng-if="!readableTask.getComment(0)"> No comments! </span>
+
+                        <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                            <button class="btn btn-default" ng-click="openComments(readableTask)">+</button>
+
+                            <script type="text/ng-template" id="myModalContentComments.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="modal-title-comment">I'm a modal!</h3>
+                                </div>
+                                <div class="modal-body" id="modal-body-comment">
+                                    <input type="text" ng-model="newComment">
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('comment')">OK</button>
+                                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                </div>
+                            </script>
                         </div>
-                        <div class="modal-body" id="modal-body">
-                            <input type="text" ng-model="newActor">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('actor')">OK</button>
-                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-                        </div>
-                    </script>
+
+                        <br/>
+                        <br/>
+
+                        <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">Remove Task</button>
+
+                        <br/>
+                    </div>
                 </div>
 
-
-
-                <br/>
-
-                <span>Task Definition :</span>
-                <span>{{ readableTask.getDefinition() }}</span>
-
-                <br/>
-
-                <span>Comments:</span>
-                <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()"> {{ comment }}, </span>
-                <span ng-if="!readableTask.getComment(0)"> No comments! </span>
-
-                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                    <button class="btn btn-default" ng-click="openComments(readableTask)">+</button>
-
-                    <script type="text/ng-template" id="myModalContentComments.html">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="modal-title-comment">I'm a modal!</h3>
-                        </div>
-                        <div class="modal-body" id="modal-body-comment">
-                            <input type="text" ng-model="newComment">
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('comment')">OK</button>
-                            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-                        </div>
-                    </script>
-                </div>
-
-                <br/>
-                <br/>
-
-                <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">Remove Task</button>
-
-
-
-
-                <br/>
 
             </div>
+
 
         </div>
         <div class="well well-lg col-md-8">Will be the image area</div>
@@ -144,6 +130,30 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    $(document).on("click", ".taskToggler", function() {
+
+        //alert($(this).attr("status") == "hidden");
+
+        if($(this).attr("status") == "hidden"){
+            $(this).html("Hide Tasks");
+            $(this).attr("status", "exposed");
+            //console.log($(this).parent().children(".tasks"));
+            $(this).parent().children(".tasks").css("display","inline-block");
+        }
+        else if($(this).attr("status") == "exposed") {
+            $(this).parent().children(".tasks").css("display","none");;
+            $(this).attr("status", "hidden");
+            $(this).html("Show Tasks");
+        }
+    });
+
+
+
+
+</script>
 
 
 

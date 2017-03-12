@@ -27,3 +27,14 @@
 .modal-demo{
     display: inline;
 }
+
+.tasks{
+    border: 2px solid orangered;
+    display: none;
+}
+
+.actor{
+    border: 2px solid purple;
+    min-height: 40px;
+    min-width: 215px;
+}
