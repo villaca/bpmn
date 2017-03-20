@@ -54,6 +54,19 @@ angular
             }
         };
 
+        ReadableProcess.prototype.deleteActor = function (actor) {
+            let tasksToBeDeleted = this.getTasksByActor(actor);
+            let index = this.actors.indexOf(actor);
+
+            for(let task of tasksToBeDeleted){
+                this.deleteTask(task);
+            }
+
+            this.disabledActors.push(this.actors[index]);
+            this.actors.splice(index, 1);
+
+        };
+
         ReadableProcess.prototype.addActor = function (newActor) {
             let index = this.actors.indexOf(newActor);
 
@@ -87,6 +100,7 @@ angular
             this.tasks = [];
             this.disabledTasks = [];
             this.actors = [];
+            this.disabledActors = [];
         }
 
         return ReadableProcess;

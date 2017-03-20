@@ -51,16 +51,12 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     };
 
 
-    $scope.putActor = function(readableTask){
-        readableTask.addActor("José");
-    };
-
-    $scope.putComment = function(readableTask){
-        readableTask.addComment("José");
-    };
-
     $scope.removeTask = function(readableProcess, readableTask){
         readableProcess.deleteTask(readableTask);
+    };
+
+    $scope.removeActor = function(readableProcess, actor){
+        readableProcess.deleteActor(actor);
     };
 
 
@@ -98,6 +94,29 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             console.log('Modal dismissed at: ' + new Date());
         });
     };
+
+    $scope.openDefinition = function (readableTask,parentSelector) {
+
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+
+
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title-definition',
+            ariaDescribedBy: 'modal-body-definition',
+            templateUrl: 'myModalContentDefinition.html',
+            controller: 'ModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            appendTo: parentElem,
+            resolve: {
+                readableTask: function () {
+                    return readableTask;
+                }
+            }
+        });
+    };
+
 
     $scope.openComments = function (readableTask,parentSelector) {
 
@@ -139,12 +158,16 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     var $ctrl = this;
 
     $scope.newActor = null;
+    $scope.newDefinition = null;
     $scope.newComment = null;
 
     $ctrl.ok = function (thingToAdd) {
 
         if(thingToAdd == 'actor'){
             readableTask.addActor($scope.newActor);
+        }
+        if(thingToAdd == 'definition'){
+            readableTask.addDefinition($scope.newDefinition);
         }
         if(thingToAdd == 'comment'){
             readableTask.addComment($scope.newComment);

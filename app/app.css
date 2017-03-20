@@ -28,6 +28,10 @@
     display: inline;
 }
 
+.taskColumn{
+    padding-left: 0px;
+}
+
 .tasks{
     border: 2px solid orangered;
     display: none;
