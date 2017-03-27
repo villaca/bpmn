@@ -35,10 +35,12 @@
 .tasks{
     border: 2px solid orangered;
     display: none;
+    margin-top: 5px;
 }
 
 .actor{
     border: 2px solid purple;
     min-height: 40px;
     min-width: 215px;
+    margin-bottom: 10px;
 }

@@ -1,5 +1,8 @@
 <div ng-controller="View1Ctrl" class="container">
-    <input type="file" on-read-file="showContent($content)" />
+
+    <label class="btn btn-default btn-file">
+        Select file <input type="file" style="display: none;" on-read-file="showContent($content)">
+    </label>
 
 
     <div class="row " ng-if="readableProcess">
@@ -15,10 +18,13 @@
                     <span ng-if="actor != '' "> Actor: {{ actor }} </span>
 
 
-                    <button class="btn btn-warning pull-right" ng-click="removeActor(readableProcess, actor)">
-                        Remove Actor</button>
-                    <button class="btn btn-primary pull-right taskToggler" type="button" status="hidden">
-                        Show Tasks</button>
+                    <div class="btn-group pull-right" role="group" >
+                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden">
+                            Show Tasks</button>
+                        <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)">
+                            Remove Actor</button>
+                    </div>
+
 
                     <div ng-repeat="readableTask in readableProcess.getTasksByActor(actor)" class="tasks">
 
@@ -130,10 +136,10 @@
         if($(this).attr("status") == "hidden"){
             $(this).html("Hide Tasks");
             $(this).attr("status", "exposed");
-            $(this).parent().children(".tasks").css("display","inline-block");
+            $(this).parent().parent().children(".tasks").css("display","inline-block");
         }
         else if($(this).attr("status") == "exposed") {
-            $(this).parent().children(".tasks").css("display","none");
+            $(this).parent().parent().children(".tasks").css("display","none");
             $(this).attr("status", "hidden");
             $(this).html("Show Tasks");
         }
