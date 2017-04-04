@@ -1,5 +1,47 @@
 /* app css stylesheet */
 
+body {
+    background-color: #FFEC91;
+    margin-bottom:50px;
+}
+
+nav {
+    font-weight: bolder;
+    color: #ffffff;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+}
+
+.navbar-default {
+    background-color: #D7A0E8;
+    background-image: linear-gradient(to bottom,#DAC3E8,#D7A0E8 130%);
+    border-radius: 0px;
+    border: 1px solid #D7A0E8;
+    box-shadow: inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
+}
+
+.main {
+    margin-bottom:50px;
+}
+
+footer{
+    position:fixed;
+    height:50px;
+    background-color: #E88A0C;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+}
+
+
+
+.tool-presentation-text {
+    margin-top: 0px;
+}
+
 .menu {
     list-style: none;
     border-bottom: 0.1em solid black;
@@ -43,4 +85,10 @@
     min-height: 40px;
     min-width: 215px;
     margin-bottom: 10px;
+}
+
+.drawing {
+    background-color: #ffffff;
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff 100%);
+    min-height: 400px;
 }

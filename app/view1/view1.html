@@ -1,8 +1,21 @@
 <div ng-controller="View1Ctrl" class="container">
 
-    <label class="btn btn-default btn-file">
-        Select file <input type="file" style="display: none;" on-read-file="showContent($content)">
-    </label>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label class="btn btn-default btn-file">
+                Select file <input type="file" style="display: none;" on-read-file="showContent($content)">
+            </label>
+        </div>
+        <div class="col-md-9">
+            <h3 class="tool-presentation-text">Placeholder</h3>
+            <p>
+                Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh
+                ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer
+                imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium
+            </p>
+        </div>
+    </div>
 
 
     <div class="row " ng-if="readableProcess">
@@ -90,7 +103,7 @@
 
 
         </div>
-        <div class="well well-lg col-md-8">Will be the image area</div>
+        <div class="well well-lg col-md-8 drawing">Will be the image area</div>
     </div>
 
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
