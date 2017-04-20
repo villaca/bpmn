@@ -96,6 +96,23 @@ angular
             return tasks;
         };
 
+
+        ReadableProcess.prototype.draw = function (context) {
+            console.log("oi");
+            console.log(context);
+
+            var coordinateX = 0;
+            var coordinateY = 0;
+            var width = 40;
+            var height = 40;
+
+            for(let task of this.tasks){
+                context.strokeRect(coordinateX, coordinateY, width, height);
+                coordinateX += 50
+            }
+
+        }
+
         function ReadableProcess() {
             this.tasks = [];
             this.disabledTasks = [];
