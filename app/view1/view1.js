@@ -59,7 +59,18 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         readableProcess.deleteActor(actor);
     };
 
+    $scope.draw = function (readableProcess) {
+        var canvas = document.getElementById('processCanvas');
+        console.log("first pass");
+        console.log(canvas);
+        if (canvas.getContext){
+            console.log("second pass");
+            var context = canvas.getContext('2d');
+            readableProcess.draw(context);
+        } else {
 
+        }
+    }
 })
 
 .controller('ModalCtrl', function ($scope, $uibModal, $document, ReadableTask) {

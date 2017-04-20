@@ -92,7 +92,8 @@
                         <br/>
 
                         <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">
-                            Remove Task</button>
+                            Remove Task
+                        </button>
 
                         <br/>
                     </div>
@@ -103,7 +104,14 @@
 
 
         </div>
-        <div class="well well-lg col-md-8 drawing">Will be the image area</div>
+
+        <button class="btn btn-default" ng-click="draw(readableProcess)">
+            Draw Process
+        </button>
+        <div class="well well-lg col-md-8 drawing">
+            <canvas id="processCanvas" width="500px" height="500px"></canvas>
+        </div>
+
     </div>
 
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
