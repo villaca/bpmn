@@ -98,17 +98,68 @@ angular
 
 
         ReadableProcess.prototype.draw = function (context) {
-            console.log("oi");
-            console.log(context);
-
             var coordinateX = 0;
             var coordinateY = 0;
-            var width = 40;
-            var height = 40;
+            var actorWidth = 100;
+            var actorHeight = 20;
+            var taskWidth = 100;
+            var taskHeight = 100;
+            var commentWidth = 100;
+            var commentHeight = 50;
+
+            var spaceBetweenBoxes = 40;
+
+            var taskIndex = 0;
 
             for(let task of this.tasks){
-                context.strokeRect(coordinateX, coordinateY, width, height);
-                coordinateX += 50
+                taskIndex++;
+                let actor = task.getActor(0);
+                if((actor == null) || (actor == "")){
+                    actor = "No actors!";
+                }
+                let comment = task.getComment(0);
+
+                context.strokeRect(coordinateX, coordinateY, actorWidth, actorHeight);
+                context.fillText(actor, coordinateX + 30, coordinateY + 13);
+
+                coordinateY += actorHeight + spaceBetweenBoxes;
+
+                context.beginPath();
+                context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
+                context.lineTo(coordinateX + actorWidth/2, coordinateY);
+                context.stroke();
+                context.closePath();
+
+                context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
+                context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
+
+                if(taskIndex != this.tasks.length){
+                    context.beginPath();
+                    context.moveTo(coordinateX + taskWidth, coordinateY + taskHeight/2);
+                    context.lineTo(coordinateX + taskWidth + 20, coordinateY + taskHeight/2);
+                    context.lineTo(coordinateX + taskWidth + 15, coordinateY + taskHeight/2 - 5);
+                    context.moveTo(coordinateX + taskWidth + 20, coordinateY + taskHeight/2);
+                    context.lineTo(coordinateX + taskWidth + 15, coordinateY + taskHeight/2 + 5);
+                    context.stroke();
+                    context.closePath();
+                }
+
+
+                if((comment != null) && (comment != "")){
+                    coordinateY += taskHeight + spaceBetweenBoxes;
+
+                    context.beginPath();
+                    context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
+                    context.lineTo(coordinateX + actorWidth/2, coordinateY);
+                    context.stroke();
+                    context.closePath();
+
+                    context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
+                    context.fillText(comment, coordinateX + 10, coordinateY + 15);
+                }
+
+                coordinateY = 0;
+                coordinateX += 120
             }
 
         }
