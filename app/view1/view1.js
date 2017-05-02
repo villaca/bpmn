@@ -61,11 +61,9 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
     $scope.draw = function (readableProcess) {
         var canvas = document.getElementById('processCanvas');
-        console.log("first pass");
-        console.log(canvas);
         if (canvas.getContext){
-            console.log("second pass");
             var context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
             readableProcess.draw(context);
         } else {
 
