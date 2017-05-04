@@ -1,51 +1,47 @@
-<div ng-controller="View1Ctrl" class="container">
+<div ng-controller="View1Ctrl" id="main-content" class="container">
 
 
-    <div class="row">
+    <div class="row" id="selection-area">
         <div class="col-md-3">
-            <label class="btn btn-default btn-file">
-                Select file <input type="file" style="display: none;" on-read-file="showContent($content)">
+            <label  id="file-button">
+                Enviar <input type="file" style="display: none;" on-read-file="showContent($content)">
             </label>
         </div>
         <div class="col-md-9">
-            <h3 class="tool-presentation-text">Placeholder</h3>
-            <p>
-                Praesent in mauris eu tortor porttitor accumsan. Mauris suscipit, ligula sit amet pharetra semper, nibh
-                ante cursus purus, vel sagittis velit mauris vel metus. Aenean fermentum risus id tortor. Integer
-                imperdiet lectus quis justo. Integer tempor. Vivamus ac urna vel leo pretium
-            </p>
+            <h1 class="tool-presentation-text">CAMELoT</h1>
+            
+            <p class="center">Seja bem vindo ao <span class="name"><span class="green">C</span>itizen <span class="green">A</span>utomatic <span class="green">M</span>od<span class="green">EL</span> Transformation</span>! Clique em enviar para traduzir o arquivo</p>
         </div>
     </div>
 
 
-    <div class="row " ng-if="readableProcess">
+    <div class="row" ng-if="readableProcess">
         <h1>File content is:</h1>
 
-        <div class="col-md-4">
+        <div class="col-md-4" id="action-box">
 
 
-            <div class="well well-lg taskColumn">
+            <div class="well well-lg taskColumn" id="inner-action-box">
 
                 <div ng-repeat="actor in readableProcess.getActors()" class="actor">
-                    <span ng-if="actor == '' "> Actor: No Actors! </span>
-                    <span ng-if="actor != '' "> Actor: {{ actor }} </span>
+                    
 
 
                     <div class="btn-group pull-right" role="group" >
-                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden">
-                            Show Tasks</button>
-                        <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)">
-                            Remove Actor</button>
+                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button>
+                        <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button>
                     </div>
-
-
+                    
+                    <span ng-if="actor == '' "> Actor: No Actors! </span>
+                    <span ng-if="actor != '' "> Actor: {{ actor }} </span> 
+                        
                     <div ng-repeat="readableTask in readableProcess.getTasksByActor(actor)" class="tasks">
 
                         <span>Task Definition :</span>
                         <span>{{ readableTask.getDefinition() }}</span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                            <button class="btn btn-default pull-right" ng-click="openDefinition(readableTask)">+</button>
+                            <button class="btn btn-default pull-right" ng-click="openDefinition(readableTask)"><i class="material-icons">add</i></button>
 
                             <script type="text/ng-template" id="myModalContentDefinition.html">
                                 <div class="modal-header">
@@ -72,7 +68,7 @@
                         <span ng-if="!readableTask.getComment(0)"> No comments! </span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                            <button class="btn btn-default pull-right" ng-click="openComments(readableTask)">+</button>
+                            <button class="btn btn-default pull-right" ng-click="openComments(readableTask)"><i class="material-icons">add</i></button>
 
                             <script type="text/ng-template" id="myModalContentComments.html">
                                 <div class="modal-header">
@@ -103,11 +99,11 @@
 
 
         </div>
-        <div class="well well-lg col-md-8 drawing">Will be the image area</div>
+        <div class="well well-lg col-md-7 drawing" id="image-area">Will be the image area</div>
     </div>
 
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
-        <div class="col-md-4 well well-lg ">
+        <div class="col-md-4 well well-lg " id="disabled-activities">
             <h2>Disabled Activities:</h2>
             <button class="btn btn-primary pull-right disabledToggler" type="button" status="hidden">
                 Show Disabled Tasks</button>
@@ -138,6 +134,10 @@
             </div>
         </div>
     </div>
+    <div>
+        <h2 class="center green">Atenção!</h2>
+        <p>A <span class="green">CAMELoT</span> ainda não atende a transformação de modelos mais  elaborados, com vários e longos fluxos, eventos complexos ou determinados elementos sintáticos não usuais. <a href="#!/view2#use" class="center green">Para saber mais clique aqui.</a></p>
+    </div>
 </div>
 
 <script>
@@ -147,14 +147,14 @@
         //alert($(this).attr("status") == "hidden");
 
         if($(this).attr("status") == "hidden"){
-            $(this).html("Hide Tasks");
+            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
             $(this).attr("status", "exposed");
             $(this).parent().parent().children(".tasks").css("display","inline-block");
         }
         else if($(this).attr("status") == "exposed") {
             $(this).parent().parent().children(".tasks").css("display","none");
             $(this).attr("status", "hidden");
-            $(this).html("Show Tasks");
+            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
         }
     });
 

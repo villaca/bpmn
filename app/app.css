@@ -1,94 +1,158 @@
 /* app css stylesheet */
 
 body {
-    background-color: #FFEC91;
-    margin-bottom:50px;
+    background-color:#0C6AA6 ;
+    font-size: 20px;
+    color: white;
+    letter-spacing: 0.1em;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-nav {
+.center {
+    text-align: center;
+}
+
+.name {
     font-weight: bolder;
-    color: #ffffff;
 }
 
-.navbar-default .navbar-nav>li>a {
-    color: #ffffff;
+.green {
+    color: #4FC88E;
 }
 
-.navbar-default {
-    background-color: #D7A0E8;
-    background-image: linear-gradient(to bottom,#DAC3E8,#D7A0E8 130%);
-    border-radius: 0px;
-    border: 1px solid #D7A0E8;
-    box-shadow: inset 0 2px 3px 0 rgba(255,255,255,.3), inset 0 -3px 6px 0 rgba(0,0,0,.2), 0 3px 2px 0 rgba(0,0,0,.2);
+a {
+   color: #4FC88E; 
 }
 
-.main {
-    margin-bottom:50px;
+a:hover {
+    color: white;
 }
 
-footer{
-    position:fixed;
-    height:50px;
-    background-color: #E88A0C;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    margin-bottom:0px;
+/*
+===================================
+        NAVIGATION MENU
+===================================
+*/
+
+#nav-header ul{
+    border: 0.15em solid #4FC88E;
+    margin: 0.5em;
+    border-radius: 1em;
+}
+
+#main-menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 0;
+    padding: 0;
+}
+
+#main-menu li a{
+    color: white;
+    padding: 1em 0.5em;
+}
+
+#main-menu li a:hover{
+    background-color: #4FC88E;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+     background-color: transparent; 
+}
+
+/*
+===================================
+        FIRST VIEW
+===================================
+*/
+
+/* here begins the selection file area attributes */
+
+#selection-area {
+    display: flex;
+    align-items: center;
 }
 
 
-
-.tool-presentation-text {
-    margin-top: 0px;
+#selection-area2 h1, #selection-area h1 {
+    font-size: 250%;
+    padding: 0.2em;
+    margin-bottom: 0.25em;
+    border-bottom: 0.15em solid #4FC88E;
+    text-align: center;
 }
 
-.menu {
-    list-style: none;
-    border-bottom: 0.1em solid black;
-    margin-bottom: 2em;
-    padding: 0 0 0.5em;
+/* here ends the selection file area attributes */
+
+/* here begins the button attributes */
+
+#file-button {
+    border-top: 0.02em solid #006F3A;
+    background: #4FC88E;
+    padding: 0.8em 1.2em;
+    -webkit-border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    border-radius: 0.8em;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    vertical-align: middle;
 }
 
-.menu:before {
-    content: "[";
+#file-button:hover {
+    background: white;
+    color: #4FC88E;
 }
 
-.menu:after {
-    content: "]";
+#file-button:active {
+    background-color: #0C116F;
 }
 
-.menu > li {
-    display: inline;
+/* here ends the button attributes */
+
+#action-box,#inner-action-box, #image-area, #disabled-activities {
+    background-color: #307CAD;
+    border: none;
+    background-image: none;
 }
 
-.menu > li + li:before {
-    content: "|";
-    padding-right: 0.3em;
+#inner-action-box {
+    padding: 0.5em;
 }
 
-.modal-demo{
-    display: inline;
+#action-box {
+    margin: 0.5em;
 }
 
-.taskColumn{
-    padding-left: 0px;
+#image-area {
+    float: right;
 }
 
-.tasks{
-    border: 2px solid orangered;
-    display: none;
-    margin-top: 5px;
+/*
+===================================
+        SECOND VIEW
+===================================
+*/
+
+.about-menu a {
+    background-color: transparent;
+    color: inherit;
+    border: none;
 }
 
-.actor{
-    border: 2px solid purple;
-    min-height: 40px;
-    min-width: 215px;
-    margin-bottom: 10px;
+.about-menu a:hover {
+    background-color: #4FC88E;
+    color: inherit;
+    border: none;
 }
 
-.drawing {
-    background-color: #ffffff;
-    background-image: linear-gradient(to bottom, #ffffff, #ffffff 100%);
-    min-height: 400px;
+.about-menu {
+    border: 0.15em solid #4FC88E;
+    margin: 0.5em;
+    border-radius: 0.5em;
 }
