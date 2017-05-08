@@ -106,6 +106,8 @@ angular
             var taskHeight = 100;
             var commentWidth = 100;
             var commentHeight = 50;
+            var maxTextWidth = 75;
+            var textHeight = 10;
 
             var spaceBetweenBoxes = 40;
 
@@ -131,7 +133,8 @@ angular
                 context.closePath();
 
                 context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
-                context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
+                //context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
+                this.wrapText(context, task.getDefinition(), coordinateX + 10, coordinateY + 40, maxTextWidth, textHeight);
 
                 if(taskIndex != this.tasks.length){
                     context.beginPath();
@@ -155,13 +158,35 @@ angular
                     context.closePath();
 
                     context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
-                    context.fillText(comment, coordinateX + 10, coordinateY + 15);
+                    //context.fillText(comment, coordinateX + 10, coordinateY + 15);
+                    this.wrapText(context, comment, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
+
                 }
 
                 coordinateY = 0;
                 coordinateX += 120
             }
 
+        }
+
+        ReadableProcess.prototype.wrapText = function (context, text, x, y, maxWidth, lineHeight) {
+            var words = text.split(' ');
+            var line = '';
+
+            for(let n = 0; n < words.length; n++) {
+                let testLine = line + words[n] + ' ';
+                let metrics = context.measureText(testLine);
+                let testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    context.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                }
+                else {
+                    line = testLine;
+                }
+            }
+            context.fillText(line, x, y);
         }
 
         function ReadableProcess() {
