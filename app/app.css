@@ -1,9 +1,9 @@
 /* app css stylesheet */
 
 body {
-    background-color:#0C6AA6 ;
-    font-size: 20px;
-    color: white;
+    background-color: #485F99/*#0C6AA6*/ ;
+    font-size: 15px;
+    color: #DFF9FF;
     letter-spacing: 0.1em;
     font-family: 'Ubuntu', sans-serif;
 }
@@ -17,11 +17,11 @@ body {
 }
 
 .green {
-    color: #4FC88E;
+    color: #FFA478;
 }
 
 a {
-   color: #4FC88E; 
+   color: #FFA478; 
 }
 
 a:hover {
@@ -35,7 +35,7 @@ a:hover {
 */
 
 #nav-header ul{
-    border: 0.15em solid #4FC88E;
+    border: 0.15em solid #FFA478;
     margin: 0.5em;
     border-radius: 1em;
 }
@@ -50,10 +50,11 @@ a:hover {
 #main-menu li a{
     color: white;
     padding: 1em 0.5em;
+    border-radius: 0px;
 }
 
 #main-menu li a:hover{
-    background-color: #4FC88E;
+    background-color: #FFA478;
 }
 
 .nav>li>a:focus, .nav>li>a:hover {
@@ -79,7 +80,7 @@ a:hover {
     font-size: 250%;
     padding: 0.2em;
     margin-bottom: 0.25em;
-    border-bottom: 0.15em solid #4FC88E;
+    border-bottom: 0.15em solid #FFA478;
     text-align: center;
 }
 
@@ -89,7 +90,7 @@ a:hover {
 
 #file-button {
     border-top: 0.02em solid #006F3A;
-    background: #4FC88E;
+    background: #FFA478;
     padding: 0.8em 1.2em;
     -webkit-border-radius: 0.8em;
     -moz-border-radius: 0.8em;
@@ -106,17 +107,18 @@ a:hover {
 
 #file-button:hover {
     background: white;
-    color: #4FC88E;
+    color: #FFA478;
 }
 
 #file-button:active {
-    background-color: #0C116F;
+    background-color: #9eabcc;
 }
 
 /* here ends the button attributes */
 
 #action-box,#inner-action-box, #image-area, #disabled-activities {
-    background-color: #307CAD;
+    background-color: #CCA69E;
+    color: inherit;
     border: none;
     background-image: none;
 }
@@ -146,13 +148,17 @@ a:hover {
 }
 
 .about-menu a:hover {
-    background-color: #4FC88E;
+    background-color: #FFA478;
     color: inherit;
     border: none;
 }
 
 .about-menu {
-    border: 0.15em solid #4FC88E;
+    border: 0.15em solid #FFA478;
     margin: 0.5em;
     border-radius: 0.5em;
+}
+
+#atention {
+    float: right;
 }
