@@ -88,7 +88,8 @@
                         <br/>
 
                         <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">
-                            Remove Task</button>
+                            Remove Task
+                        </button>
 
                         <br/>
                     </div>
@@ -99,13 +100,14 @@
 
 
         </div>
-        <div class="well well-lg col-md-7 drawing" id="image-area">Will be the image area</div>
-        <div class="row">
-            <div class="col-md-7"  id="atention"> 
-                <h2 class="center green">Atenção!</h2>
-                <p>A <span class="green">CAMELoT</span> ainda não atende a transformação de modelos mais  elaborados, com vários e longos fluxos, eventos complexos ou determinados elementos sintáticos não usuais. <a href="#!/view2#use" class="center green">Para saber mais clique aqui.</a></p>
-            </div>
+
+        <button class="btn btn-default" ng-click="draw(readableProcess)">
+            Draw Process
+        </button>
+        <div class="well well-lg col-md-8 drawing">
+            <canvas id="processCanvas" width="500px" height="500px"></canvas>
         </div>
+
     </div>
 
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
