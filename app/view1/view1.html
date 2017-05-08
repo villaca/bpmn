@@ -10,7 +10,7 @@
         <div class="col-md-9">
             <h1 class="tool-presentation-text">CAMELoT</h1>
             
-            <p class="center">Seja bem vindo ao <span class="name"><span class="green">C</span>itizen <span class="green">A</span>utomatic <span class="green">M</span>od<span class="green">EL</span> Translation</span>! Clique em enviar para traduzir o arquivo</p>
+            <p class="center">Seja bem vindo ao <span class="name"><span class="green">C</span>itizen <span class="green">A</span>utomatic <span class="green">M</span>od<span class="green">EL</span> <span class="green">T</span>ranslation</span>! Clique em enviar para traduzir o arquivo</p>
         </div>
     </div>
 
@@ -28,7 +28,7 @@
 
 
                     <div class="btn-group pull-right" role="group" >
-                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button>
+                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons visibility-icon">visibility_off</i></button>
                         <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button>
                     </div>
                     
@@ -105,7 +105,7 @@
             Draw Process
         </button>
         <div class="well well-lg col-md-8 drawing">
-            <canvas id="processCanvas" width="730px" height="500px"></canvas>
+            <canvas id="processCanvas" width="700px" height="500px"></canvas>
         </div>
 
         <p>
@@ -158,14 +158,14 @@
         //alert($(this).attr("status") == "hidden");
 
         if($(this).attr("status") == "hidden"){
-            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
+            $(this).children(".visibility-icon").html('visibility_off');
             $(this).attr("status", "exposed");
             $(this).parent().parent().children(".tasks").css("display","inline-block");
         }
         else if($(this).attr("status") == "exposed") {
             $(this).parent().parent().children(".tasks").css("display","none");
             $(this).attr("status", "hidden");
-            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
+            $(this).children(".visibility-icon").html('visibility');
         }
     });
 
