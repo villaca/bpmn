@@ -53,7 +53,7 @@
 
 
                     <div class="btn-group pull-right" role="group" >
-                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button>
+                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons visibility-icon">visibility_off</i></button>
                         <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button>
                     </div>
                     
@@ -129,7 +129,7 @@
             Draw Process
         </button>
         <div class="well well-lg col-md-8 drawing">
-            <canvas id="processCanvas" width="730px" height="500px"></canvas>
+            <canvas id="processCanvas" width="700px" height="500px"></canvas>
         </div>
         <div class="row">
             <div class="col-md-7"  id="atention"> 
@@ -188,14 +188,14 @@
         //alert($(this).attr("status") == "hidden");
 
         if($(this).attr("status") == "hidden"){
-            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
+            $(this).children(".visibility-icon").html('visibility_off');
             $(this).attr("status", "exposed");
             $(this).parent().parent().children(".tasks").css("display","inline-block");
         }
         else if($(this).attr("status") == "exposed") {
             $(this).parent().parent().children(".tasks").css("display","none");
             $(this).attr("status", "hidden");
-            $("#visibility-icon").replaceWith("<i class='material-icons'>visibility</i>");
+            $(this).children(".visibility-icon").html('visibility');
         }
     });
 
