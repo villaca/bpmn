@@ -113,8 +113,18 @@ angular
 
             var taskIndex = 0;
 
+			if(this.tasks.length > 6){
+				$(".drawing").css("overflow","scroll");
+				var widthCanvas = 700;
+				for(var i=6;i < this.tasks.length;i++){
+					widthCanvas += 120;
+				}
+				$("#processCanvas").attr("width",widthCanvas);
+			}
+			
             for(let task of this.tasks){
-                taskIndex++;
+				taskIndex++;
+
                 let actor = task.getActor(0);
                 if((actor == null) || (actor == "")){
                     actor = "No actors!";

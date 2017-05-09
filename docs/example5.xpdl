@@ -58,6 +58,84 @@
                 </DataField>
             </DataFields>
             <Activities>
+
+
+				<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+				
+				<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+
+				<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+				
+								<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+								<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+								<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+								<Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <NodeGraphicsInfos>
+                        <NodeGraphicsInfo Height="68.0" PageId="6" Shape="Task" ToolId="Trisotech_Visio" Width="83.0">
+                            <Coordinates XCoordinate="342.0" YCoordinate="112.0"/>
+                        </NodeGraphicsInfo>
+                    </NodeGraphicsInfos>
+                </Activity>
+
+				
+				
                 <Activity CompletionQuantity="1" Id="_2760ddfa-59df-4233-93ea-380c2892f99f" IsForCompensation="false" Name="" StartQuantity="1">
                     <Implementation>
                         <No/>
