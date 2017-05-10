@@ -12,10 +12,8 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 .controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask) {
     $scope.showContent = function(content){
         //$scope.content = content;
-
         var x2js = new X2JS();
         var json = x2js.xml_str2json(content);
-
         console.log(json.Package.WorkflowProcesses/*.WorkflowProcess.Activities*/);
 
         if( Array.isArray(json.Package.WorkflowProcesses.WorkflowProcess) ){
@@ -74,7 +72,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 		var canvas = document.getElementById('processCanvas');
 		var link = document.getElementById('btnDownload');
 		link.href = canvas.toDataURL();
-		link.download = "bpmn";
+		link.download = "bpnm";
     }
 })
 
