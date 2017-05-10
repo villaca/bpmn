@@ -124,16 +124,16 @@ angular
 			
             for(let task of this.tasks){
 				taskIndex++;
-
                 let actor = task.getActor(0);
                 if((actor == null) || (actor == "")){
                     actor = "No actors!";
                 }
                 let comment = task.getComment(0);
-
+				context.fillStyle = "#FFFFFF";
+				context.fillRect(coordinateX, coordinateY, actorWidth, actorHeight);
+				context.fillStyle = "#111111";
                 context.strokeRect(coordinateX, coordinateY, actorWidth, actorHeight);
                 context.fillText(actor, coordinateX + 30, coordinateY + 13);
-
                 coordinateY += actorHeight + spaceBetweenBoxes;
 
                 context.beginPath();
@@ -141,7 +141,10 @@ angular
                 context.lineTo(coordinateX + actorWidth/2, coordinateY);
                 context.stroke();
                 context.closePath();
-
+				
+				context.fillStyle = "#FFFFFF";
+				context.fillRect(coordinateX, coordinateY, taskWidth, taskHeight);
+				context.fillStyle = "#111111";
                 context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
                 //context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
                 this.wrapText(context, task.getDefinition(), coordinateX + 10, coordinateY + 40, maxTextWidth, textHeight);
@@ -160,13 +163,12 @@ angular
 
                 if((comment != null) && (comment != "")){
                     coordinateY += taskHeight + spaceBetweenBoxes;
-
                     context.beginPath();
                     context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
                     context.lineTo(coordinateX + actorWidth/2, coordinateY);
                     context.stroke();
                     context.closePath();
-
+					
                     context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
                     //context.fillText(comment, coordinateX + 10, coordinateY + 15);
                     this.wrapText(context, comment, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
