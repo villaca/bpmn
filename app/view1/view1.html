@@ -104,6 +104,9 @@
         <button class="btn btn-default" ng-click="draw(readableProcess)">
             Draw Process
         </button>
+		<a id="btnDownload"><button class="btn btn-default" ng-click="download(readableProcess)">
+            Download Image
+        </button></a>
         <div class="well well-lg col-md-8 drawing">
             <canvas id="processCanvas" width="700px" height="500px"></canvas>
         </div>
@@ -183,8 +186,6 @@
             $(this).html("Show Disabled Tasks");
         }
     });
-
-
 
 
 </script>
