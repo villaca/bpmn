@@ -178,7 +178,7 @@ angular
             }
 
         }
-
+		
         ReadableProcess.prototype.wrapText = function (context, text, x, y, maxWidth, lineHeight) {
             var words = text.split(' ');
             var line = '';

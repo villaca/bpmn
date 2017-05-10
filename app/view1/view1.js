@@ -69,6 +69,13 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
         }
     }
+	
+	$scope.download = function (readableProcess) {
+		var canvas = document.getElementById('processCanvas');
+		var link = document.getElementById('btnDownload');
+		link.href = canvas.toDataURL();
+		link.download = "bpmn";
+    }
 })
 
 .controller('ModalCtrl', function ($scope, $uibModal, $document, ReadableTask) {
