@@ -72,7 +72,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 		var canvas = document.getElementById('processCanvas');
 		var link = document.getElementById('btnDownload');
 		link.href = canvas.toDataURL();
-		var nameFile = document.getElementById('uploadFile').files.item(0).name.split('.xpdl');
+		var nameFile = document.getElementById('uploadFile').files.item(0).name.replace('.xpdl','');
 		link.download = nameFile+".png";
     }
 })
