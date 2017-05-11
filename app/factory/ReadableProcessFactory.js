@@ -98,8 +98,8 @@ angular
 
 
         ReadableProcess.prototype.draw = function (context) {
-            var coordinateX = 0;
-            var coordinateY = 0;
+            var coordinateX = 25;
+            var coordinateY = 25;
             var actorWidth = 100;
             var actorHeight = 20;
             var taskWidth = 100;
@@ -115,7 +115,7 @@ angular
 
 			if(this.tasks.length > 6){
 				$(".drawing").css("overflow","scroll");
-				var widthCanvas = 700;
+				var widthCanvas = 750;
 				for(var i=6;i < this.tasks.length;i++){
 					widthCanvas += 120;
 				}
@@ -175,7 +175,7 @@ angular
 
                 }
 
-                coordinateY = 0;
+                coordinateY = 25;
                 coordinateX += 120
             }
 
