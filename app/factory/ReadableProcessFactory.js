@@ -113,7 +113,7 @@ angular
 
             var taskIndex = 0;
 
-			if(this.tasks.length > 6){
+			if(this.tasks.length > 5){
 				$(".drawing").css("overflow","scroll");
 				var widthCanvas = 750;
 				for(var i=6;i < this.tasks.length;i++){
