@@ -62,6 +62,8 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         if (canvas.getContext){
             var context = canvas.getContext('2d');
             context.clearRect(0, 0, canvas.width, canvas.height);
+			canvas.setAttribute("height", "500");
+			canvas.setAttribute("width", "700");
             readableProcess.draw(context);
         } else {
 
