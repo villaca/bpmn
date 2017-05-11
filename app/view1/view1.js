@@ -72,7 +72,8 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 		var canvas = document.getElementById('processCanvas');
 		var link = document.getElementById('btnDownload');
 		link.href = canvas.toDataURL();
-		link.download = "bpnm";
+		var nameFile = document.getElementById('uploadFile').files.item(0).name.split('.xpdl');
+		link.download = nameFile+".png";
     }
 })
 
