@@ -135,6 +135,20 @@ a:hover {
     float: right;
 }
 
+.actor {
+    margin: 0.5em 0;
+    padding: 1em;
+    background-color: #9EABCC;
+}
+
+.actor-box {
+    margin-bottom: 0;
+}
+
+#action-box {
+    padding: 0 0.09em;
+}
+
 /*
 ===================================
         SECOND VIEW
