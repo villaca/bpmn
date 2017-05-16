@@ -9,11 +9,32 @@
         </div>
         <div class="col-md-9">
             <h1 class="tool-presentation-text">CAMELoT</h1>
-            
-            <p class="center">Seja bem vindo ao <span class="name"><span class="green">C</span>itizen <span class="green">A</span>utomatic <span class="green">M</span>od<span class="green">EL</span> Transformation</span>! Clique em enviar para traduzir o arquivo</p>
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <p class="center col-md-9">Seja bem vindo ao <span class="name"><span class="green">C</span>itizen <span class="green">A</span>utomatic <span class="green">M</span>od<span class="green">EL</span> Transformation</span>! Clique em enviar para traduzir o arquivo</p>
+                <div class="col-md-1">
+                    <!-- Trigger/Open The Modal -->
+                    <button class="help" id="myBtn">?</button>
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                        <span class="close-box">&times;</span>
+                        <h2 class="center green">Atenção!</h2>
+                        <p>A <span class="green">CAMELoT</span> ainda não atende a transformação de modelos mais  elaborados, com vários e longos fluxos, eventos complexos ou determinados elementos sintáticos não usuais. <a href="#!/view2#use" class="center green">Para saber mais clique aqui.</a></p>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-
+    
+    
 
     <div class="row" ng-if="readableProcess">
         <h1>File content is:</h1>
@@ -174,8 +195,32 @@
         }
     });
 
+    //Villaca basta trocar esse javascript para jquery
+    // Get the modal
+    var modal = document.getElementById('myModal');
 
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close-box")[0];
+
+    // When the user clicks on the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
 </script>
 
