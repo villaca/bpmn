@@ -98,8 +98,47 @@ angular
 
 
         ReadableProcess.prototype.draw = function (context) {
+			
+			
+			function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+				if (typeof stroke == 'undefined') {
+					stroke = true;
+				}
+				if (typeof radius === 'undefined') {
+					radius = 5;
+				}
+				if (typeof radius === 'number') {
+					radius = {tl: radius, tr: radius, br: radius, bl: radius};
+				} else {
+					var defaultRadius = {tl: 0, tr: 0, br: 0, bl: 0};
+					for (var side in defaultRadius) {
+					  radius[side] = radius[side] || defaultRadius[side];
+					}
+				}
+				ctx.beginPath();
+				ctx.moveTo(x + radius.tl, y);
+				ctx.lineTo(x + width - radius.tr, y);
+				ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+				ctx.lineTo(x + width, y + height - radius.br);
+				ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+				ctx.lineTo(x + radius.bl, y + height);
+				ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+				ctx.lineTo(x, y + radius.tl);
+				ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+				ctx.closePath();
+					
+				if (fill) {
+					ctx.fill();
+				}	
+					
+				  if (stroke) {
+					ctx.stroke();
+				  }
+			}
+			
+			
             var coordinateX = 25;
-            var coordinateY = 25;
+            var coordinateY = 50;
             var actorWidth = 100;
             var actorHeight = 20;
             var taskWidth = 100;
@@ -109,7 +148,7 @@ angular
             var maxTextWidth = 75;
             var textHeight = 10;
 
-            var spaceBetweenBoxes = 40;
+            var spaceBetweenBoxes = 20;
 
             var taskIndex = 0;
 
@@ -130,22 +169,35 @@ angular
                 }
                 let comment = task.getComment(0);
 				context.fillStyle = "#FFFFFF";
-				context.fillRect(coordinateX, coordinateY, actorWidth, actorHeight);
+				
+				context.beginPath();
+				context.arc(coordinateX + 10, coordinateY - 25, 10, 0, 2 * Math.PI);
+				context.stroke();
+				context.fill();
 				context.fillStyle = "#111111";
-                context.strokeRect(coordinateX, coordinateY, actorWidth, actorHeight);
-                context.fillText(actor, coordinateX + 30, coordinateY + 13);
-                coordinateY += actorHeight + spaceBetweenBoxes;
-
-                context.beginPath();
-                context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
-                context.lineTo(coordinateX + actorWidth/2, coordinateY);
-                context.stroke();
-                context.closePath();
+				this.wrapText(context, taskIndex+"", coordinateX + 7, coordinateY -22, maxTextWidth, textHeight);
+				context.closePath();
+				
 				
 				context.fillStyle = "#FFFFFF";
-				context.fillRect(coordinateX, coordinateY, taskWidth, taskHeight);
+				roundRect(context, coordinateX, coordinateY, actorWidth, actorHeight, 5, true, true);
+		   //	context.fillRect(coordinateX, coordinateY, actorWidth, actorHeight);
 				context.fillStyle = "#111111";
-                context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
+		   //   context.strokeRect(coordinateX, coordinateY, actorWidth, actorHeight);
+                context.fillText(actor, coordinateX + 20, coordinateY + 13);
+                coordinateY += actorHeight + spaceBetweenBoxes;
+
+//                context.beginPath();
+//                context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
+//                context.lineTo(coordinateX + actorWidth/2, coordinateY);
+//                context.stroke();
+//                context.closePath();
+				
+				context.fillStyle = "#FFFFFF";
+				roundRect(context, coordinateX, coordinateY, taskWidth, taskHeight, 5, true, true);
+ //				context.fillRect(coordinateX, coordinateY, taskWidth, taskHeight);
+				context.fillStyle = "#111111";
+ //             context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
                 //context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
                 this.wrapText(context, task.getDefinition(), coordinateX + 10, coordinateY + 40, maxTextWidth, textHeight);
 
@@ -175,7 +227,7 @@ angular
 
                 }
 
-                coordinateY = 25;
+                coordinateY = 50;
                 coordinateX += 120
             }
 
