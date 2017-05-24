@@ -50,15 +50,25 @@
 
                 <div ng-repeat="actor in readableProcess.getActors()" class="actor">
                     
-
-
-                    <div class="btn-group pull-right" role="group" >
-                        <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons visibility-icon">visibility_off</i></button>
-                        <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button>
-                    </div>
-                    
+                   
                     <span ng-if="actor == '' "> Actor: No Actors! </span>
                     <span ng-if="actor != '' "> Actor: {{ actor }} </span> 
+
+                    <div class="btn-group dropdown-btn" role="group" >
+                        <!-- <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button>
+                        <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button> -->
+                        <div class="dropdown ">
+                          <button class="btn btn-default dropdown-toggle orange-button" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="material-icons">more_vert</i>
+                            <!-- <span class="caret"></span> -->
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-app" aria-labelledby="dropdownMenu1">
+                            <li><a href="#"><button type="button" class="btn btn-primary taskToggler orange-button" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button></a></li>
+                            <li><a href="#"><button type="button" class="btn btn-warning orange-button" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button></a></li>
+                            <li role="separator" class="divider"></li>
+                          </ul>
+                        </div>
+                    </div>
                         
                     <div ng-repeat="readableTask in readableProcess.getTasksByActor(actor)" class="tasks">
 
@@ -66,18 +76,20 @@
                         <span>{{ readableTask.getDefinition() }}</span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                            <button class="btn btn-default pull-right" ng-click="openDefinition(readableTask)"><i class="material-icons">add</i></button>
+                            <button class="btn btn-default pull-right orange-button" ng-click="openDefinition(readableTask)"><i class="material-icons">add</i></button>
 
                             <script type="text/ng-template" id="myModalContentDefinition.html">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="modal-title-definition">Change task definition</h3>
-                                </div>
-                                <div class="modal-body" id="modal-body-definition">
-                                    <input type="text" ng-model="newDefinition">
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('definition')">OK</button>
-                                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                <div class="modal-window">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="modal-title-definition">Change task definition</h3>
+                                    </div>
+                                    <div class="modal-body" id="modal-body-definition">
+                                        <input type="text" ng-model="newDefinition">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary orange-button" type="button" ng-click="$ctrl.ok('definition')">OK</button>
+                                        <button class="btn btn-warning orange-button" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                    </div>
                                 </div>
                             </script>
                         </div>
@@ -93,7 +105,7 @@
                         <span ng-if="!readableTask.getComment(0)"> No comments! </span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                            <button class="btn btn-default pull-right" ng-click="openComments(readableTask)"><i class="material-icons">add</i></button>
+                            <button class="btn btn-default pull-right orange-button" ng-click="openComments(readableTask)"><i class="material-icons">add</i></button>
 
                             <script type="text/ng-template" id="myModalContentComments.html">
                                 <div class="modal-header">
@@ -103,8 +115,8 @@
                                     <input type="text" ng-model="newComment">
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok('comment')">OK</button>
-                                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                                    <button class="btn btn-primary orange-button" type="button" ng-click="$ctrl.ok('comment')">OK</button>
+                                    <button class="btn btn-warning orange-button" type="button" ng-click="$ctrl.cancel()">Cancel</button>
                                 </div>
                             </script>
                         </div>
@@ -112,9 +124,14 @@
                         <br/>
                         <br/>
 
+<<<<<<< HEAD
                         <button class="btn btn-warning" ng-click="removeTask(readableProcess, readableTask)">
                             Remove Task
                         </button>
+=======
+                        <button class="btn btn-warning orange-button" ng-click="removeTask(readableProcess, readableTask)">
+                            Remove Task</button>
+>>>>>>> adicionando cores aos botoes e dropdown aos atores
 
                         <br/>
                     </div>
@@ -149,7 +166,7 @@
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
         <div class="col-md-4 well well-lg " id="disabled-activities">
             <h2>Disabled Activities:</h2>
-            <button class="btn btn-primary pull-right disabledToggler" type="button" status="hidden">
+            <button class="btn btn-primary pull-right disabledToggler orange-button" type="button" status="hidden">
                 Show Disabled Tasks</button>
 
             <div class="tasks" ng-repeat="readableTask in readableProcess.getDisabledTasks()">

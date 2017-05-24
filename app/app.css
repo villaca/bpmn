@@ -116,47 +116,8 @@ a:hover {
 
 /* here ends the button attributes */
 
-#action-box,#inner-action-box, #image-area, #disabled-activities {
-    background-color: #CCA69E;
-    color: inherit;
-    border: none;
-    background-image: none;
-}
+/* Here begins the Modal Content/Box attributes */
 
-#inner-action-box {
-    padding: 0.5em;
-}
-
-#action-box {
-    /*margin: 0.5em;*/
-}
-
-#image-area {
-    float: right;
-}
-
-.actor {
-    margin: 0.5em 0;
-    padding: 1em;
-    background-color: #9EABCC;
-    border-radius: 1em;
-}
-
-.actor-box {
-    margin-bottom: 0;
-    border-radius: 1em;
-}
-
-#action-box {
-    padding: 0 0.09em;
-    border-radius: 1em;
-}
-
-.tasks {
-    padding: 2em 0 1em 0;
-}
-
-/* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -170,7 +131,6 @@ a:hover {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 .modal-content {
     background-color: #9EABCC;
     margin: 15% auto; /* 15% from the top and centered */
@@ -203,6 +163,110 @@ a:hover {
    border-radius: 1em;
 
 }
+
+.modal-window {
+    color: #FFA478;
+}
+
+/* Here ends the Modal Content/Box attributes */
+
+/* here begins the actors and tasks attributes */
+#action-box,#inner-action-box, #image-area, #disabled-activities {
+    background-color: #CCA69E;
+    color: inherit;
+    border: none;
+    background-image: none;
+}
+
+#inner-action-box {
+    padding: 0.5em;
+    overflow-y: scroll;
+    height: 40em;
+}
+
+#action-box {
+    /*margin: 0.5em;*/
+}
+
+#image-area {
+    float: right;
+}
+
+.actor {
+    margin: 0.5em 0;
+    padding: 1em;
+    background-color: #9EABCC;
+    border-radius: 1em;
+}
+
+.actor-box {
+    margin-bottom: 0;
+    border-radius: 1em;
+}
+
+#action-box {
+    padding: 0 0.09em;
+    border-radius: 1em;
+}
+
+.tasks {
+    padding: 2em 0 1em 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.tasks:last-child {
+    border-bottom: none;
+}
+
+.modal-body {
+    color: #FFA478;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    background-image: none;
+    background-repeat: none;
+}
+
+.btn-warning:hover, .btn-warning:focus {
+    color: #f0ad4e;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.orange-button{
+    background: #FFA478;
+    border-color: transparent;
+    color: white;
+}
+
+.orange-button:hover, .orange-button:focus {
+    background: white;
+    border-color: transparent;
+    color: #FFA478;
+}
+
+.dropdown{
+    margin: 0 1em 0 1em;   
+}
+
+.btn-default.active.focus, .btn-default.active:focus, 
+.btn-default.active:hover, .btn-default:active.focus, 
+.btn-default:active:focus, .btn-default:active:hover, 
+.open>.dropdown-toggle.btn-default.focus, 
+.open>.dropdown-toggle.btn-default:focus, 
+.open>.dropdown-toggle.btn-default:hover {
+    background: white;
+    border-color: transparent;
+    color: #FFA478;
+}
+
+
+
+/* here ends the actors and tasks attributes */
+
 /*
 ===================================
         SECOND VIEW
