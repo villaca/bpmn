@@ -105,6 +105,7 @@ a:hover {
     vertical-align: middle;
 }
 
+
 #file-button:hover {
     background: white;
     color: #FFA478;
@@ -114,11 +115,39 @@ a:hover {
     background-color: #9eabcc;
 }
 
+#show-app-content {
+        /* border-top: 0.02em solid #006F3A; */
+    background: #FFA478;
+    padding: 0.8em 1.2em;
+    box-sizing: border-box;
+    -webkit-border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    border-radius: 0.8em;
+    /* -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; */
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    /* box-shadow: rgba(0,0,0,1) 0 1px 0; */
+    /* text-shadow: rgba(0,0,0,.4) 0 1px 0; */
+    color: white;
+    /* font-size: 0.8em; */
+    text-decoration: none;
+    vertical-align: middle;
+    border: 0px solid transparent;
+}
+
+#show-app-content:hover {
+    background: white;
+    color: #FFA478;
+}
+
+#show-app-content:active {
+    background-color: #9eabcc;
+}
+
 /* here ends the button attributes */
 
 /* Here begins the Modal Content/Box attributes */
 
-.modal {
+.help-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -132,13 +161,22 @@ a:hover {
 }
 
 .modal-content {
-    background-color: #9EABCC;
+    background-color: #485F99;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 1em;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 40em;
+    height: 15em;
+    box-sizing: border-box; /* Could be more or less, depending on screen size */
 }
 
+.modal-body > input {
+    height: 3em;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 1em;
+    padding: 0 1em;
+}
 /* The Close Button */
 .close-box {
     color: #FFA478;
@@ -178,22 +216,21 @@ a:hover {
     background-image: none;
 }
 
-#inner-action-box {
+#inner-action-box, #inner-disabled {
     padding: 0.5em;
     overflow-y: scroll;
     height: 40em;
 }
 
-#action-box {
-    margin: 0.5em;
-
-}
+#inner-disabled{
+    overflow-y: auto;
+    height: auto;
+} 
 
 #image-area {
     float: right;
 }
-
-.actor {
+.actor, .disabled-tasks {
     margin: 0.5em 0;
     padding: 1em;
     background-color: #9EABCC;
@@ -205,9 +242,10 @@ a:hover {
     border-radius: 1em;
 }
 
-#action-box {
+#action-box, #disabled-activities {
     padding: 0 0.09em;
     border-radius: 1em;
+    margin: 0.5em;
 }
 
 .tasks {
