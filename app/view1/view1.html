@@ -18,13 +18,13 @@
                     <button class="help" id="myBtn">?</button>
 
                     <!-- The Modal -->
-                    <div id="myModal" class="modal">
+                    <div id="myModal" class="help-modal">
 
                       <!-- Modal content -->
                       <div class="modal-content">
                         <span class="close-box">&times;</span>
                         <h2 class="center green">Atenção!</h2>
-                        <p>A <span class="green">CAMELoT</span> ainda não atende a transformação de modelos mais  elaborados, com vários e longos fluxos, eventos complexos ou determinados elementos sintáticos não usuais. <a href="#!/view2#use" class="center green">Para saber mais clique aqui.</a></p>
+                        <p>A <span class="green">CAMELoT</span> ainda não atende a transformação de modelos mais  elaborados, com vários e longos fluxos, eventos complexos ou determinados elementos sintáticos não usuais. <!-- <a href="#!/view1#use" class="center green">Para saber mais clique aqui.</a> --></p>
                       </div>
 
                     </div>
@@ -37,10 +37,32 @@
             </div>
         </div>
     </div>
-    
-    
 
-    <div class="row" ng-if="readableProcess">
+    <div class="row" id="app-description">
+        
+        <div class="col-md-12">
+            <h2 class="green center">Contexto e motivação</h2>
+            <p id="context" >Modelos de processo de negócio construídos com notações e linguagens técnicas não são de fácil entendimento pela maioria dos cidadãos. Por outro lado textos em linguagem natural não são adequados para representar processos de negócios, por possuírem problemas semânticos e linguísticos próprios, apesar de melhor entendidos pela maioria dos cidadãos. Uma linguagem de processos cidadã objetiva mesclar "o melhor dos dois mundos", apresentando uma sintaxe apropriada para representar tarefas e atividades, minimizando (ou excluindo) os problemas semânticos da linguagem natural, como ambiguidade, sobrecarga de leitura, excesso de repetição, entre outros.</p>
+
+            <h2 class="green center">Objetivo</h2>
+            <p id="objective" >Transformar de forma semi-automática modelos de processo de negócio escritos em uma notação técnica para uma linguagem cidadã de forma que estes sejam mais facilmente entendíveis por cidadãos. Tem como insumo um arquivo XPDL gerado a partir de um modelo em Business Process Modeling and Notation (BPMN). Um modelo de processo de negócio em Linguagem Cidadã será o produto da ferramenta.  Este produto é um modelo de processo de negócio simplificado representando o mesmo processo de negócio utilizado como entrada.</p>
+
+            <h2 class="green center">Instruções de Uso</h2>
+            <ol >
+                <li>Na tela inicial você deverá clicar em Selecionar Arquivo</li>
+                <li>Selecionar um arquivo XPDL no seu dispositivo</li>
+                <li>O sistema realizará o primeiro passo da adaptação internamente</li>
+                <li>Na tela de configuração você adaptará o processo de negócio como preferir para esta linguagem cidadã</li>
+                <li>Clicar em finalizar</li>
+                <li>O sistema realizará o segundo passo da adaptação internamente</li>
+                <li>O sistema mostrará o modelo final em linguagem cidadã</li>
+                <li id="use">Na tela de exposição do modelo você poderá salvar o modelo adaptado como imagem ou reiniciar a adaptação</li>
+            </ol>
+            <p>Pronto, aí está seu modelo de processo de negócio com melhor entendimento, em notação e sintaxe, pelos cidadãos. <button id="show-app-content">Para utilizar o CAMELoT clique aqui.</button></p>
+        </div>
+    </div>      
+
+    <div class="row" id="main-app" ng-if="readableProcess">
         <h1>File content is:</h1>
 
         <div class="col-md-4" id="action-box">
@@ -50,7 +72,6 @@
 
                 <div ng-repeat="actor in readableProcess.getActors()" class="actor">
                     
-                   
                     <span ng-if="actor == '' "> Actor: No Actors! </span>
                     <span ng-if="actor != '' "> Actor: {{ actor }} </span> 
 
@@ -124,7 +145,6 @@
                         <br/>
                         <br/>
 
-
                         <button class="btn btn-warning orange-button" ng-click="removeTask(readableProcess, readableTask)">
                             Remove Task
 						</button>
@@ -161,33 +181,36 @@
 
     <div class="row" ng-if="readableProcess.getDisabledTask(0)">
         <div class="col-md-4 well well-lg " id="disabled-activities">
-            <h2>Disabled Activities:</h2>
-            <button class="btn btn-primary pull-right disabledToggler orange-button" type="button" status="hidden">
-                Show Disabled Tasks</button>
 
-            <div class="tasks" ng-repeat="readableTask in readableProcess.getDisabledTasks()">
-                <h3>Task {{$index + 1}} </h3>
+		<div id="inner-disabled">
+                <h2>Disabled Activities:</h2>
+                <button class="btn btn-primary pull-right disabledToggler orange-button" type="button" status="hidden">
+                    Show Disabled Tasks
+				</button>
 
+                <div class="tasks" ng-repeat="readableTask in readableProcess.getDisabledTasks()">
+                    <div class="disabled-tasks">
+                        <h3>Task {{$index + 1}} </h3>
 
+                        <span>Task actor:</span>
+                        <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()">
+                            {{ actor }},  </span>
+                        <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
 
-                <span>Task actor:</span>
-                <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()">
-                    {{ actor }},  </span>
-                <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+                        <br/>
 
-                <br/>
+                        <span>Task Definition :</span>
+                        <span>{{ readableTask.getDefinition() }}</span>
 
-                <span>Task Definition :</span>
-                <span>{{ readableTask.getDefinition() }}</span>
+                        <br/>
 
-                <br/>
+                        <span>Comments:</span>
+                        <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
+                            {{ comment }}, </span>
+                        <span ng-if="!readableTask.getComment(0)"> No comments! </span>
 
-                <span>Comments:</span>
-                <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
-                    {{ comment }}, </span>
-                <span ng-if="!readableTask.getComment(0)"> No comments! </span>
-
-
+                    </div>
+                </div>
             </div>
         </div>        
     </div>
@@ -228,8 +251,15 @@
 
     // When the user clicks on the button, open the modal 
     $("#myBtn").on("click", function() {
+        $("#app-description").show(1000);
+        $("#main-app").hide(1000);
         $('#myModal').css("display", "block");
     });
+
+    $("#show-app-content").click(function(){
+            $("#main-app").show(1000);
+            $("#app-description").hide(1000);
+        });
 
     // When the user clicks on <span> (x), close the modal
     $(".close-box").on("click", function() {
@@ -242,6 +272,10 @@
             $('#myModal').css("display", "none");
         }
     });
+
+    $("#file-button").click(function(){
+            $("#app-description").hide(1000);
+        });
 
 </script>
 
