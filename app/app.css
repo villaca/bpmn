@@ -59,7 +59,7 @@ a:hover {
 
 .nav>li>a:focus, .nav>li>a:hover {
     text-decoration: none;
-     background-color: transparent; 
+    background-color: transparent;
 }
 
 /*
@@ -227,6 +227,22 @@ a:hover {
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
+.colorSelector {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: url(resources/colorpicker/images/select.png);
+}
+
+.colorSelector div {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 30px;
+    height: 30px;
+    background: url(resources/colorpicker/images/select.png) center;
+}
+
 .tasks:last-child {
     border-bottom: none;
 }
@@ -240,7 +256,8 @@ a:hover {
     background-color: #f0ad4e;
     border-color: #eea236;
     background-image: none;
-    background-repeat: none;
+    background-repeat: no-repeat;
+}
 
 /* Here begins the Modal Content/Box attributes */
 
@@ -265,6 +282,14 @@ a:hover {
     width: 40em;
     height: 15em;
     box-sizing: border-box; /* Could be more or less, depending on screen size */
+}
+
+#canvasModal .modal-content {
+    width: 75em;
+    height: 44em;
+}
+.drawing {
+    margin-top: 30px;
 }
 
 .modal-body > input {
@@ -305,6 +330,10 @@ a:hover {
     margin: 0 1em 0 1em;   
 }
 
+.dropdown-menu-app {
+    color: #485F99;;
+}
+
 .btn-default.active.focus, .btn-default.active:focus, 
 .btn-default.active:hover, .btn-default:active.focus, 
 .btn-default:active:focus, .btn-default:active:hover, 
@@ -316,8 +345,6 @@ a:hover {
     color: #FFA478;
 }
 
-<<<<<<< HEAD
-=======
 .modal-window {
     color: #FFA478;
 }
@@ -362,7 +389,7 @@ a:hover {
 #action-box, #disabled-activities {
     padding: 0 0.09em;
     border-radius: 1em;
-    margin: 0.5em;
+    //margin: 0.5em;
 }
 
 .tasks {
@@ -383,7 +410,7 @@ a:hover {
     background-color: #f0ad4e;
     border-color: #eea236;
     background-image: none;
-    background-repeat: none;
+    background-repeat: no-repeat;
 }
 
 .btn-warning:hover, .btn-warning:focus {

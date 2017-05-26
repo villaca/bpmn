@@ -92,8 +92,15 @@ angular
                     }
                 }
             }
-
             return tasks;
+        };
+
+        ReadableProcess.prototype.setActorName = function (newActorName) {
+            let index = this.actors.indexOf(newActorName);
+
+            if (index == -1) {
+                this.actors.push(newActor);
+            }
         };
 
 
@@ -135,7 +142,22 @@ angular
 					ctx.stroke();
 				  }
 			}
-			
+
+			function arrow(ctx, x, y){
+
+			    ctx.beginPath();
+                ctx.moveTo(x,y);
+                ctx.lineTo(x + 10, y);
+                ctx.lineTo(x + 10, y + 10);
+                ctx.lineTo(x + 25, y - 8);
+                ctx.lineTo(x + 10, y - 26);
+                ctx.lineTo(x + 10, y - 16);
+                ctx.lineTo(x, y - 16);
+                ctx.lineTo(x, y);
+                ctx.closePath();
+
+                ctx.stroke();
+            }
 			
             var coordinateX = 25;
             var coordinateY = 50;
@@ -152,9 +174,10 @@ angular
 
             var taskIndex = 0;
 
+
 			if(this.tasks.length > 5){
 				$(".drawing").css("overflow","scroll");
-				var widthCanvas = 750;
+				var widthCanvas = 1000;
 				for(var i=6;i < this.tasks.length;i++){
 					widthCanvas += 120;
 				}
@@ -171,45 +194,28 @@ angular
 				context.fillStyle = "#FFFFFF";
 				
 				context.beginPath();
-				context.arc(coordinateX + 10, coordinateY - 25, 10, 0, 2 * Math.PI);
+				context.arc(coordinateX + actorWidth/2, coordinateY - 25, 10, 0, 2 * Math.PI);
 				context.stroke();
 				context.fill();
 				context.fillStyle = "#111111";
-				this.wrapText(context, taskIndex+"", coordinateX + 7, coordinateY -22, maxTextWidth, textHeight);
+				this.wrapText(context, taskIndex+"", coordinateX + actorWidth/2 - 3, coordinateY - 22, maxTextWidth, textHeight);
 				context.closePath();
 				
 				
 				context.fillStyle = "#FFFFFF";
-				roundRect(context, coordinateX, coordinateY, actorWidth, actorHeight, 5, true, true);
-		   //	context.fillRect(coordinateX, coordinateY, actorWidth, actorHeight);
+				roundRect(context, coordinateX, coordinateY, actorWidth, actorHeight, 12, true, true);
 				context.fillStyle = "#111111";
-		   //   context.strokeRect(coordinateX, coordinateY, actorWidth, actorHeight);
                 context.fillText(actor, coordinateX + 20, coordinateY + 13);
                 coordinateY += actorHeight + spaceBetweenBoxes;
 
-//                context.beginPath();
-//                context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
-//                context.lineTo(coordinateX + actorWidth/2, coordinateY);
-//                context.stroke();
-//                context.closePath();
-				
+
 				context.fillStyle = "#FFFFFF";
-				roundRect(context, coordinateX, coordinateY, taskWidth, taskHeight, 5, true, true);
- //				context.fillRect(coordinateX, coordinateY, taskWidth, taskHeight);
+				roundRect(context, coordinateX, coordinateY, taskWidth, taskHeight, 15, true, true);
 				context.fillStyle = "#111111";
- //             context.strokeRect(coordinateX, coordinateY, taskWidth, taskHeight);
-                //context.fillText(task.getDefinition(), coordinateX + 10, coordinateY + 40);
                 this.wrapText(context, task.getDefinition(), coordinateX + 10, coordinateY + 40, maxTextWidth, textHeight);
 
                 if(taskIndex != this.tasks.length){
-                    context.beginPath();
-                    context.moveTo(coordinateX + taskWidth, coordinateY + taskHeight/2);
-                    context.lineTo(coordinateX + taskWidth + 20, coordinateY + taskHeight/2);
-                    context.lineTo(coordinateX + taskWidth + 15, coordinateY + taskHeight/2 - 5);
-                    context.moveTo(coordinateX + taskWidth + 20, coordinateY + taskHeight/2);
-                    context.lineTo(coordinateX + taskWidth + 15, coordinateY + taskHeight/2 + 5);
-                    context.stroke();
-                    context.closePath();
+                    arrow(context, coordinateX + 10 + taskWidth, coordinateY + taskHeight/2 + 5);
                 }
 
 
@@ -228,7 +234,7 @@ angular
                 }
 
                 coordinateY = 50;
-                coordinateX += 120
+                coordinateX += 150
             }
 
         }

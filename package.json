@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "angular-animate": "^1.6.1",
+    "angular-bootstrap-colorpicker": "^3.0.31",
     "angular-touch": "^1.6.1"
   }
 }

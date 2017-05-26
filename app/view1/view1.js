@@ -112,6 +112,28 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         });
     };
 
+    $scope.openActorName = function (readableProcess,parentSelector) {
+
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+
+
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title-definition',
+            ariaDescribedBy: 'modal-body-definition',
+            templateUrl: 'myModalContentDefinition.html',
+            controller: 'ModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            appendTo: parentElem,
+            resolve: {
+                readableProcess: function () {
+                    return readableProcess;
+                }
+            }
+        });
+    };
+
     $scope.openDefinition = function (readableTask,parentSelector) {
 
         var parentElem = parentSelector ?
@@ -171,7 +193,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     };
 })
 
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask) {
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask, readableProcess) {
     var $ctrl = this;
 
     $scope.newActor = null;
@@ -189,6 +211,10 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         if(thingToAdd == 'comment'){
             readableTask.addComment($scope.newComment);
         }
+        if(thingToAdd == 'actorName'){
+            readableProcess.setActorName($scope.newName);
+        }
+
         $uibModalInstance.close();
     };
 
