@@ -1,4 +1,6 @@
-<div ng-controller="View1Ctrl" id="main-content" class="container">
+<div ng-controller="View1Ctrl as $ctrl" id="main-content" class="container">
+
+    <div colorpicker style="width: 30px;height: 30px; background-color: {{color}}" ng-model="color"></div>
 
     <div class="row" id="selection-area">
         <div class="col-md-1"></div>
@@ -78,38 +80,43 @@
                             <ul class="dropdown-menu dropdown-menu-app" aria-labelledby="dropdownMenu1">
                                 <li class="taskToggler" status="exposed"><i class="material-icons" id="visibility-icon">visibility_off</i> <span>Esconder tarefas</span></li>
                                 <li ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i>Excluir ator</li>
+                                <li ng-click="openActorName(readableProcess, actor)">
+                                    <div class="modal-demo" style="display: inline-block">
+                                        <i class="material-icons">edit</i> Editar nome do ator
+                                        <script type="text/ng-template" id="myModalActorName.html">
+                                            <div class="modal-window">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="modal-actor-name">Alterar nome do ator {{ actor }}</h3>
+                                                </div>
+                                                <div class="modal-body" id="modal-body-actor-name">
+                                                    <input type="text" ng-model="newActorName">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary orange-button" type="button" ng-click="$ctrl.ok('actorName')">OK</button>
+                                                    <button class="btn btn-warning orange-button" type="button" ng-click="$ctrl.cancel()">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </script>
+                                    </div>
+                                </li>
                                 <li>
 
                                 </li>
 
                                 <li role="separator" class="divider"></li>
-                          </ul>
+                            </ul>
                         </div>
                     </div>
-                    <div ng-controller="ModalCtrl as $ctrl" class="modal-demo" style="display: inline-block">
-                        <button class="btn btn-default pull-right orange-button" ng-click="openActorName(readableProcess)"><i class="material-icons">edit</i></button>
 
-                        <script type="text/ng-template" id="myModalActorName.html">
-                            <div class="modal-window">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" id="modal-actor-name">Alterar nome do ator</h3>
-                                </div>
-                                <div class="modal-body" id="modal-body-actor-name">
-                                    <input type="text" ng-model="newName">
-                                    <input type="hidden" ng-model="oldName" value="{{ actor }}">
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary orange-button" type="button" ng-click="$ctrl.ok('actorName')">OK</button>
-                                    <button class="btn btn-warning orange-button" type="button" ng-click="$ctrl.cancel()">Cancelar</button>
-                                </div>
-                            </div>
-                        </script>
-                    </div>
-                        
+                    <div colorpicker class="colorpicker" style="width:30px; height: 30px; display: inline-block; background-color: {{color}};" ng-model="color" actor="{{ actor }}" ng-process="readableProcess"></div>
+                    <span>Escolher a cor</span>
+
                     <div ng-repeat="readableTask in readableProcess.getTasksByActor(actor)" class="tasks">
 
                         <span>Definição da tarefa:</span>
                         <span>{{ readableTask.getDefinition() }}</span>
+                        <span ng-model="readableTask.color"></span>
+
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
                             <button class="btn btn-default pull-right orange-button" ng-click="openDefinition(readableTask)"><i class="material-icons">add</i></button>
@@ -315,20 +322,6 @@
         //event.stopPropagation();
     });
 
-    $('.colorSelector').ColorPicker({
-        color: '#0000ff',
-        onShow: function (colpkr) {
-            $(colpkr).fadeIn(500);
-            return false;
-        },
-        onHide: function (colpkr) {
-            $(colpkr).fadeOut(500);
-            return false;
-        },
-        onChange: function (hsb, hex, rgb) {
-            $('.colorSelector div').css('backgroundColor', '#' + hex);
-        }
-    });
 
 
 </script>

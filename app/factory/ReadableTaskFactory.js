@@ -9,21 +9,6 @@ angular
     .module('myApp.factories')
     .factory('ReadableTask', function () {
 
-        ReadableTask.prototype.addActor = function (newActor){
-            let index = this.actor.indexOf(newActor);
-
-            if(index == -1){
-                this.actor.push(newActor);
-            }
-            else{
-                alert("This actor already exists!")
-            }
-
-            if(typeof this.actor[0] == 'undefined'){
-                this.actor.splice(0, 1);
-            }
-        }
-
         ReadableTask.prototype.addComment = function (newComment){
             let index = this.actor.indexOf(newComment);
 
@@ -42,11 +27,8 @@ angular
             this.taskDefinition = newTaskDefinition;
         }
 
-        ReadableTask.prototype.getAllActor = function () {
+        ReadableTask.prototype.getActor = function () {
             return this.actor;
-        }
-        ReadableTask.prototype.getActor = function (index) {
-            return this.actor[index];
         }
 
         ReadableTask.prototype.getAllComment = function () {
@@ -60,20 +42,34 @@ angular
             return this.taskDefinition;
         }
 
-        ReadableTask.prototype.getNumberOfActors = function () {
-            return this.actor.length;
-        }
         ReadableTask.prototype.getNumberOfComments = function () {
             return this.comment.length;
         }
 
+        ReadableTask.prototype.setActor = function(newActor){
+            this.actor = newActor;
+        }
 
-        function ReadableTask(newActor, newTaskDefinition, newComment) {
-            this.actor = [];
-            this.comment = [];
+        ReadableTask.prototype.getColor = function(){
+            return this.color;
+        }
+        ReadableTask.prototype.setColor = function(newColor){
+            this.color = newColor;
+        }
 
-            this.actor.push(newActor);
+
+        function ReadableTask(newActor, newTaskDefinition, newComment, newColor) {
+            this.actor = newActor;
             this.taskDefinition = newTaskDefinition;
+
+            if(newColor == null){
+                this.color = "#ffffff";
+            }
+            else {
+                this.color = newColor;
+            }
+
+            this.comment = [];
             this.comment.push(newComment);
         }
 

@@ -11,7 +11,8 @@ angular.module('myApp', [
     'myApp.version',
     'myApp.factories',
     'myApp.services',
-    'myApp.directives'
+    'myApp.directives',
+    'colorpicker.module'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

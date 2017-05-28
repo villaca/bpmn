@@ -9,7 +9,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
   });
 }])
 
-.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask) {
+.controller('View1Ctrl', function ($scope, $rootScope, ReadableProcess, ReadableTask, Actor, $uibModal, $document) {
     $scope.showContent = function(content){
         //$scope.content = content;
         var x2js = new X2JS();
@@ -23,7 +23,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             var workflow = json.Package.WorkflowProcesses.WorkflowProcess;
         }
 
-        console.log(workflow);
+        //console.log(workflow);
 
         var readableProcess = new ReadableProcess();
 
@@ -31,10 +31,14 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
             for(let activity of workflow.Activities.Activity){
                 let readableTask = new ReadableTask(activity.Performer, activity._Name);
+                //let actor = new Actor(activity.Performer, readableTask);
                 readableProcess.addTask(readableTask);
             }
-            console.log(readableProcess.getTasks());
+
+
+
             $scope.readableProcess = readableProcess;
+            $rootScope.readableProcess = readableProcess;
         }
         else if(workflow.hasOwnProperty('ActivitySets')){
 
@@ -43,8 +47,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
                 readableProcess.addTask(readableTask);
             }
 
-            console.log(readableProcess.getTasks());
-
+            //console.log(readableProcess.getTasks());
         }
     };
 
@@ -77,9 +80,51 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 		var nameFile = document.getElementById('uploadFile').files.item(0).name.replace('.xpdl','');
 		link.download = nameFile+".png";
     }
+
+    var $ctrl = this;
+    $ctrl.animationsEnabled = true;
+
+
+    $scope.openActorName = function (readableProcess, actor,parentSelector) {
+
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+
+        $scope.oldActorName = actor;
+
+        var modalInstance = $uibModal.open({
+            scope: $scope,
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title-definition',
+            ariaDescribedBy: 'modal-body-definition',
+            templateUrl: 'myModalActorName.html',
+            controller: 'ProcessModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            appendTo: parentElem,
+            resolve: {
+                readableProcess: function () {
+                    return readableProcess;
+                }
+            }
+        });
+    };
+
+    $scope.color = '#ffffff';
+
+    $scope.$on('colorpicker-selected', function(event, colorObject){
+        console.log(colorObject);
+        console.log($scope.readableProcess);
+        //console.log($rootScope.readableProcess);
+        $scope.readableProcess.setActorColor(colorObject.actor, colorObject.value);
+    });
+
+    $scope.changeColor = function (actor, color) {
+        $scope.readableProcess.setActorColor(actor, color);
+    }
+
 })
 
-.controller('ModalCtrl', function ($scope, $uibModal, $document, ReadableTask) {
+.controller('ModalCtrl', function ($scope, $uibModal, $document) {
     var $ctrl = this;
     $ctrl.animationsEnabled = true;
 
@@ -95,7 +140,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
+            controller: 'TaskModalInstanceCtrl',
             controllerAs: '$ctrl',
             appendTo: parentElem,
             resolve: {
@@ -112,27 +157,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         });
     };
 
-    $scope.openActorName = function (readableProcess,parentSelector) {
 
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-
-
-        var modalInstance = $uibModal.open({
-            animation: $ctrl.animationsEnabled,
-            ariaLabelledBy: 'modal-title-definition',
-            ariaDescribedBy: 'modal-body-definition',
-            templateUrl: 'myModalContentDefinition.html',
-            controller: 'ModalInstanceCtrl',
-            controllerAs: '$ctrl',
-            appendTo: parentElem,
-            resolve: {
-                readableProcess: function () {
-                    return readableProcess;
-                }
-            }
-        });
-    };
 
     $scope.openDefinition = function (readableTask,parentSelector) {
 
@@ -145,7 +170,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             ariaLabelledBy: 'modal-title-definition',
             ariaDescribedBy: 'modal-body-definition',
             templateUrl: 'myModalContentDefinition.html',
-            controller: 'ModalInstanceCtrl',
+            controller: 'TaskModalInstanceCtrl',
             controllerAs: '$ctrl',
             appendTo: parentElem,
             resolve: {
@@ -168,7 +193,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             ariaLabelledBy: 'modal-title-comment',
             ariaDescribedBy: 'modal-body-comment',
             templateUrl: 'myModalContentComments.html',
-            controller: 'ModalInstanceCtrl',
+            controller: 'TaskModalInstanceCtrl',
             controllerAs: '$ctrl',
             appendTo: parentElem,
             resolve: {
@@ -186,14 +211,12 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     };
 
 
-
-
     $ctrl.toggleAnimation = function () {
         $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
     };
 })
 
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask, readableProcess) {
+.controller('TaskModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask) {
     var $ctrl = this;
 
     $scope.newActor = null;
@@ -211,8 +234,25 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
         if(thingToAdd == 'comment'){
             readableTask.addComment($scope.newComment);
         }
+
+
+        $uibModalInstance.close();
+    };
+
+    $ctrl.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+})
+
+.controller('ProcessModalInstanceCtrl', function ($scope, $uibModalInstance, readableProcess) {
+    var $ctrl = this;
+
+    $scope.newActorName = null;
+
+    $ctrl.ok = function (thingToAdd) {
+
         if(thingToAdd == 'actorName'){
-            readableProcess.setActorName($scope.newName);
+            readableProcess.setActorName($scope.newActorName, $scope.oldActorName);
         }
 
         $uibModalInstance.close();
