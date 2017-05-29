@@ -9,13 +9,19 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
   });
 }])
 
-.controller('View1Ctrl', function ($scope, $rootScope, ReadableProcess, ReadableTask, Actor, $uibModal, $document) {
+.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask, Actor, $uibModal, $document) {
     $scope.showContent = function(content){
         //$scope.content = content;
         var x2js = new X2JS();
         var json = x2js.xml_str2json(content);
-        console.log(json.Package.WorkflowProcesses/*.WorkflowProcess.Activities*/);
+        console.log(json.Package/*.WorkflowProcess.Activities*/);
 
+        if( Array.isArray(json.Package.Pools.Pool) ){
+            var lanes = json.Package.Pools.Pool[1].Lanes;
+        }
+        else {
+            var lanes = json.Package.Pools.Pool.Lanes;
+        }
         if( Array.isArray(json.Package.WorkflowProcesses.WorkflowProcess) ){
             var workflow = json.Package.WorkflowProcesses.WorkflowProcess[1];
         }
@@ -23,23 +29,41 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             var workflow = json.Package.WorkflowProcesses.WorkflowProcess;
         }
 
-        //console.log(workflow);
+        console.log(workflow);
+        console.log(lanes);
 
         var readableProcess = new ReadableProcess();
 
         if(workflow.hasOwnProperty('Activities')){
 
             for(let activity of workflow.Activities.Activity){
-                let readableTask = new ReadableTask(activity.Performer, activity._Name);
-                //let actor = new Actor(activity.Performer, readableTask);
-                readableProcess.addTask(readableTask);
+                if(activity.hasOwnProperty('Event') || (activity._Name == "")){
+                    continue;
+                }
+
+                for(let lane of lanes.Lane){
+                    let laneBeginX = parseInt(lane.NodeGraphicsInfos.NodeGraphicsInfo.Coordinates._XCoordinate, 10);
+                    let laneEndX = laneBeginX + parseInt(lane.NodeGraphicsInfos.NodeGraphicsInfo._Width, 10);
+                    let laneBeginY = parseInt(lane.NodeGraphicsInfos.NodeGraphicsInfo.Coordinates._YCoordinate, 10);
+                    let laneEndY = laneBeginY + parseInt(lane.NodeGraphicsInfos.NodeGraphicsInfo._Height, 10);
+
+                    let activityX = activity.NodeGraphicsInfos.NodeGraphicsInfo.Coordinates._XCoordinate;
+                    let activityY = activity.NodeGraphicsInfos.NodeGraphicsInfo.Coordinates._YCoordinate;
+
+                    if((activityX >= laneBeginX) && (activityX < laneEndX)){
+                        if((activityY >= laneBeginY) && (activityY < laneEndY)){
+                            let readableTask = new ReadableTask(lane._Name, activity._Name);
+                            readableProcess.addTask(readableTask);
+                        }
+                    }
+                }
             }
 
-
-
             $scope.readableProcess = readableProcess;
-            $rootScope.readableProcess = readableProcess;
         }
+        /*
+        * TODO: IMPLEMENTAR COMPORTAMENTO PARA CASOS DE SUBPROCESSOS
+        *
         else if(workflow.hasOwnProperty('ActivitySets')){
 
             for(let activity of workflow.Activities.Activity){
@@ -48,7 +72,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             }
 
             //console.log(readableProcess.getTasks());
-        }
+        }*/
     };
 
 
@@ -112,9 +136,6 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     $scope.color = '#ffffff';
 
     $scope.$on('colorpicker-selected', function(event, colorObject){
-        console.log(colorObject);
-        console.log($scope.readableProcess);
-        //console.log($rootScope.readableProcess);
         $scope.readableProcess.setActorColor(colorObject.actor, colorObject.value);
     });
 

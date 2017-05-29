@@ -94,11 +94,18 @@ angular
             return tasks;
         };
 
-        ReadableProcess.prototype.setActorName = function (newActorName) {
-            let index = this.actors.indexOf(newActorName);
+        ReadableProcess.prototype.setActorName = function (newActorName, oldActorName) {
+            let index = this.actors.indexOf(oldActorName);
 
-            if (index == -1) {
-                this.actors.push(newActor);
+            console.log(newActorName);
+            console.log(oldActorName);
+
+            if (index != -1) {
+                this.actors[index] = newActorName;
+
+                for(let task of this.getTasksByActor(oldActorName)){
+                    task.setActor(newActorName);
+                }
             }
         };
 
@@ -189,11 +196,11 @@ angular
             var taskIndex = 0;
 
 
-            if(this.tasks.length > 5){
+            if(this.tasks.length > 0){
                 $(".drawing").css("overflow","scroll");
-                var widthCanvas = 1000;
-                for(var i=6;i < this.tasks.length;i++){
-                    widthCanvas += 120;
+                var widthCanvas = 100;
+                for(var i=0;i < this.tasks.length;i++){
+                    widthCanvas += 180;
                 }
                 $("#processCanvas").attr("width",widthCanvas);
             }
@@ -214,7 +221,13 @@ angular
                 context.stroke();
                 context.fill();
                 context.fillStyle = "#111111";
-                this.wrapText(context, taskIndex+"", coordinateX + actorWidth/2 - 3, coordinateY - 22, maxTextWidth, textHeight);
+                if(taskIndex >= 10){
+                    this.wrapText(context, taskIndex+"", coordinateX + actorWidth/2 - 6, coordinateY - 22, maxTextWidth, textHeight);
+                }
+                else {
+                    this.wrapText(context, taskIndex+"", coordinateX + actorWidth/2 - 3, coordinateY - 22, maxTextWidth, textHeight);
+                }
+
                 context.closePath();
 
 
@@ -283,4 +296,4 @@ angular
         }
 
         return ReadableProcess;
-});
+    });
