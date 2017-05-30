@@ -302,7 +302,34 @@ a:hover {
     color: #FFA478;
 }
 
+ul {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  position: relative;
+  float: left;
+  list-style: none;
+  list-style-image: none; /* DRUPAL!! */
+  padding: .5em 1em;
+  margin: 0;
+}
+ul li ul {
+  display: none;
+  position: absolute;
+  width: 10em;
+  left: 0;
+  top: 1em;
+}
 
+ul li:hover ul {
+  display: block;
+}
+
+ul li:hover ul {
+  /*display: block;*/
+}
 
 /* here ends the actors and tasks attributes */
 

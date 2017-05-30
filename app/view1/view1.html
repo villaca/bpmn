@@ -79,17 +79,30 @@
                     <div class="btn-group dropdown-btn" role="group" >
                         <!-- <button type="button" class="btn btn-primary taskToggler" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button>
                         <button type="button" class="btn btn-warning" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button> -->
-                        <div class="dropdown ">
+                        <!-- <div class="dropdown ">
                           <button class="btn btn-default dropdown-toggle orange-button" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <i class="material-icons">more_vert</i>
                             <!-- <span class="caret"></span> -->
-                          </button>
+                          <!-- </button>
                           <ul class="dropdown-menu dropdown-menu-app" aria-labelledby="dropdownMenu1">
                             <li><a href="#"><button type="button" class="btn btn-primary taskToggler orange-button" type="button" status="hidden"><i class="material-icons" id="visibility-icon">visibility_off</i></button></a></li>
                             <li><a href="#"><button type="button" class="btn btn-warning orange-button" ng-click="removeActor(readableProcess, actor)"><i class="material-icons">delete</i></button></a></li>
                             <li role="separator" class="divider"></li>
                           </ul>
-                        </div>
+                        </div> --> 
+                        <!-- sample Drupal markup -->
+                        <ul class="menu">
+                          <li class="first leaf">Item 1</li>
+                          <li class="leaf">Item 2</li>
+                          <li class="expanded">Item 3
+                            <ul class="menu">
+                              <li class="leaf">Sub-item 1</li>
+                              <li class="leaf">Sub-item 2</li>
+                              <li class="leaf">Sub-item 3</li>
+                            </ul>
+                          </li>
+                          <li class="leaf last">Last item</li>
+                        </ul>
                     </div>
                         
                     <div ng-repeat="readableTask in readableProcess.getTasksByActor(actor)" class="tasks">
@@ -263,6 +276,25 @@
     $("#file-button").click(function(){
             $("#app-description").hide(1000);
         });
+
+    jQuery(function($){
+      var timerOut;
+
+      $('.expanded').on('mouseover', function(){
+        clearTimeout(timerOut);
+        var self = this;
+        setTimeout(function(){
+          $('ul', self).show();
+        }, 300);
+
+      }).on('mouseout', function() {
+        var self = this;
+        timerOut = setTimeout(function() {
+          $('ul', self).hide();
+        }, 300);
+
+      });
+    });
 
 </script>
 
