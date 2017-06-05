@@ -123,6 +123,22 @@ angular
             }
         };
 
+        ReadableProcess.prototype.addTransition = function (newTransition) {
+            let index = this.transitions.indexOf(newTransition);
+
+            if (index == -1) {
+                this.transitions.push(newTransition);
+            }
+        };
+
+        ReadableProcess.prototype.getTransitions = function () {
+            return this.transitions;
+        };
+
+        ReadableProcess.prototype.getTransition = function (index) {
+            return this.transitions[index];
+        };
+
 
         ReadableProcess.prototype.draw = function (context) {
 
@@ -293,6 +309,7 @@ angular
             this.disabledTasks = [];
             this.actors = [];
             this.disabledActors = [];
+            this.transitions =[];
         }
 
         return ReadableProcess;

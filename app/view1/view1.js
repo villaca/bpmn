@@ -9,7 +9,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
   });
 }])
 
-.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask, Actor, $uibModal, $document) {
+.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask, Actor, Transition, $uibModal, $document) {
     $scope.showContent = function(content){
         //$scope.content = content;
         var x2js = new X2JS();
@@ -29,10 +29,19 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             var workflow = json.Package.WorkflowProcesses.WorkflowProcess;
         }
 
+        if( Array.isArray(workflow.Transitions.Transition) ){
+            var transitions = workflow.Transitions.Transition;
+        }
+
         console.log(workflow);
         console.log(lanes);
 
         var readableProcess = new ReadableProcess();
+
+        for(let transition of transitions) {
+            let trans  = new Transition(transition._From, transition._To);
+            readableProcess.addTransition(trans);
+        }
 
         if(workflow.hasOwnProperty('Activities')){
 
@@ -59,6 +68,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
                 }
             }
 
+            console.log(readableProcess);
             $scope.readableProcess = readableProcess;
         }
         /*
