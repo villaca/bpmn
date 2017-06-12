@@ -1,10 +1,5 @@
-/**
- * Created by danie on 22/12/2016.
- */
-
-
-
 'use strict';
+
 angular
     .module('myApp.factories')
     .factory('ReadableTask', function () {
@@ -57,8 +52,15 @@ angular
             this.color = newColor;
         }
 
+        ReadableTask.prototype.getID = function(){
+            return this.id;
+        }
+        ReadableTask.prototype.setID = function(newID){
+            this.id = newID;
+        }
 
-        function ReadableTask(newActor, newTaskDefinition, newComment, newColor) {
+
+        function ReadableTask(newActor, newTaskDefinition, id, newComment, newColor) {
             this.actor = newActor;
             this.taskDefinition = newTaskDefinition;
 
@@ -71,6 +73,7 @@ angular
 
             this.comment = [];
             this.comment.push(newComment);
+            this.id = id;
         }
 
         return ReadableTask;

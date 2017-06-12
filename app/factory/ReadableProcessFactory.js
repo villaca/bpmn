@@ -1,8 +1,3 @@
-/**
- * Created by danie on 22/12/2016.
- */
-
-
 'use strict';
 
 angular
@@ -97,8 +92,8 @@ angular
         ReadableProcess.prototype.setActorName = function (newActorName, oldActorName) {
             let index = this.actors.indexOf(oldActorName);
 
-            console.log(newActorName);
-            console.log(oldActorName);
+            //console.log(newActorName);
+            //console.log(oldActorName);
 
             if (index != -1) {
                 this.actors[index] = newActorName;
@@ -112,9 +107,9 @@ angular
         ReadableProcess.prototype.setActorColor = function (actor, color) {
             let index = this.actors.indexOf(actor);
 
-            console.log("chegou:");
-            console.log(actor);
-            console.log(color);
+            //console.log("chegou:");
+            //console.log(actor);
+            //console.log(color);
 
             if (index != -1) {
                 for(let task of this.getTasksByActor(this.actors[index])){
@@ -137,6 +132,20 @@ angular
 
         ReadableProcess.prototype.getTransition = function (index) {
             return this.transitions[index];
+        };
+
+        ReadableProcess.prototype.getTasksOrdered = function () {
+            let orderedTasks= [];
+
+            for(let transition of this.transitions){
+                for(let task of this.tasks){
+                    if(task.getID() == transition.getToID()){
+                        orderedTasks.push(task);
+                    }
+                }
+            }
+
+            return orderedTasks;
         };
 
 
@@ -211,17 +220,21 @@ angular
 
             var taskIndex = 0;
 
+            let tasks = this.getTasksOrdered();
 
-            if(this.tasks.length > 0){
+            if(tasks.length > 0){
                 $(".drawing").css("overflow","scroll");
                 var widthCanvas = 100;
-                for(var i=0;i < this.tasks.length;i++){
+                for(var i=0;i < tasks.length;i++){
                     widthCanvas += 180;
                 }
                 $("#processCanvas").attr("width",widthCanvas);
             }
 
-            for(let task of this.tasks){
+            context.fillStyle = "#FFFFFF";
+            context.fillRect(0, 0, widthCanvas, 500);
+
+            for(let task of tasks){
                 //console.log("oi");
                 //console.log(task.getColor);
                 taskIndex++;

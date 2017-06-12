@@ -61,7 +61,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
                     if((activityX >= laneBeginX) && (activityX < laneEndX)){
                         if((activityY >= laneBeginY) && (activityY < laneEndY)){
-                            let readableTask = new ReadableTask(lane._Name, activity._Name);
+                            let readableTask = new ReadableTask(lane._Name, activity._Name, activity._Id);
                             readableProcess.addTask(readableTask);
                         }
                     }
@@ -69,6 +69,7 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             }
 
             console.log(readableProcess);
+            console.log(readableProcess.getTasksOrdered());
             $scope.readableProcess = readableProcess;
         }
         /*
