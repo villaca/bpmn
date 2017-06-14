@@ -142,7 +142,7 @@
 
                         <span>Comments:</span>
                         <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
-                            {{ comment }}, </span>
+                            {{ comment.getText() }}, </span>
                         <span ng-if="!readableTask.getComment(0)">Nenhum comentário</span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
@@ -153,6 +153,15 @@
                                     <h3 class="modal-title" id="modal-title-comment">Adicionar comentários</h3>
                                 </div>
                                 <div class="modal-body" id="modal-body-comment">
+                                    <div class="input-group">
+                                        <span class='input-group-addon'><small>Selecione o tipo de comentário:</small></span>
+                                        <select name='comment-type' class='form-control' id='comment-type-select' ng-model="commentType">
+                                            <option value='rule'>Regra</option>
+                                            <option value='flux'>Fluxo</option>
+                                            <option value='remark'>Observação</option>
+                                        </select>
+                                    </div>
+                                    <br>
                                     <input type="text" ng-model="newComment">
                                 </div>
                                 <div class="modal-footer">

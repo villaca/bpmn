@@ -151,6 +151,8 @@ angular
 
         ReadableProcess.prototype.draw = function (context) {
 
+            console.log(this);
+
 
             function roundRect(ctx, x, y, width, height, radius, fill, stroke, taskColor) {
                 if (typeof stroke == 'undefined') {
@@ -277,7 +279,7 @@ angular
                 }
 
 
-                if((comment != null) && (comment != "")){
+                if((comment != null) && (comment.getText() != "")){
                     coordinateY += taskHeight + spaceBetweenBoxes;
                     context.beginPath();
                     context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
@@ -285,9 +287,27 @@ angular
                     context.stroke();
                     context.closePath();
 
+                    var commentText = "";
+                    if(comment.getType() == "rule"){
+                        context.fillStyle = "#1FFFD1";
+                        commentText = "Regra: " + comment.getText();
+                    }
+                    if(comment.getType() == "flux"){
+                        context.fillStyle = "#FFFFFF";
+                        context.setLineDash([3,3]);
+                        commentText = comment.getText();
+                    }
+                    if(comment.getType() == "remark"){
+                        context.fillStyle = "#25FF63";
+                        commentText = comment.getText();
+                    }
                     context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
+                    context.fillRect(coordinateX, coordinateY, commentWidth, commentHeight);
+
+                    context.setLineDash([]);
+                    context.fillStyle = "#111111";
                     //context.fillText(comment, coordinateX + 10, coordinateY + 15);
-                    this.wrapText(context, comment, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
+                    this.wrapText(context, commentText, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
 
                 }
 

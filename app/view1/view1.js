@@ -33,8 +33,8 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             var transitions = workflow.Transitions.Transition;
         }
 
-        console.log(workflow);
-        console.log(lanes);
+        //console.log(workflow);
+        //console.log(lanes);
 
         var readableProcess = new ReadableProcess();
 
@@ -68,8 +68,8 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
                 }
             }
 
-            console.log(readableProcess);
-            console.log(readableProcess.getTasksOrdered());
+            //console.log(readableProcess);
+            //console.log(readableProcess.getTasksOrdered());
             $scope.readableProcess = readableProcess;
         }
         /*
@@ -248,11 +248,12 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
     };
 })
 
-.controller('TaskModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask) {
+.controller('TaskModalInstanceCtrl', function ($scope, $uibModalInstance, readableTask, Comment) {
     var $ctrl = this;
 
     $scope.newActor = null;
     $scope.newDefinition = null;
+    $scope.commentType = null;
     $scope.newComment = null;
 
     $ctrl.ok = function (thingToAdd) {
@@ -264,7 +265,9 @@ angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
             readableTask.addDefinition($scope.newDefinition);
         }
         if(thingToAdd == 'comment'){
-            readableTask.addComment($scope.newComment);
+            console.log($scope.commentType);
+            var comment = new Comment($scope.commentType, $scope.newComment);
+            readableTask.addComment(comment);
         }
 
 
