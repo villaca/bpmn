@@ -6,7 +6,7 @@ angular.module('myApp', [
     'ngAnimate',
     'ngTouch',
     'ui.bootstrap',
-    'myApp.view1',
+    'myApp.ferramenta',
     'myApp.view2',
     'myApp.version',
     'myApp.factories',
@@ -17,5 +17,5 @@ angular.module('myApp', [
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({redirectTo: '/ferramenta'});
 }]);

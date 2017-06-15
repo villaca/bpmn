@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
+angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap"])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/ferramenta', {
+    templateUrl: 'ferramenta/ferramenta.html',
+    controller: 'FerramentaCtrl'
   });
 }])
 
-.controller('View1Ctrl', function ($scope, ReadableProcess, ReadableTask, Actor, Transition, $uibModal, $document) {
+.controller('FerramentaCtrl', function ($scope, ReadableProcess, ReadableTask, Actor, Transition, $uibModal, $document) {
     $scope.showContent = function(content){
         //$scope.content = content;
         var x2js = new X2JS();
