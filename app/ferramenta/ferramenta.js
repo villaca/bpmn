@@ -91,6 +91,10 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
         readableProcess.deleteTask(readableTask);
     };
 
+    $scope.activateTask = function(readableProcess, readableTask){
+        readableProcess.activateTask(readableTask);
+    };
+
     $scope.removeActor = function(readableProcess, actor){
         readableProcess.deleteActor(actor);
     };

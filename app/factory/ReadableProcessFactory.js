@@ -48,6 +48,15 @@ angular
             }
         };
 
+        ReadableProcess.prototype.activateTask = function (readableTask) {
+            let index = this.disabledTasks.indexOf(readableTask);
+
+            if (index > -1) {
+                this.tasks.push(this.disabledTasks[index]);
+                this.disabledTasks.splice(index, 1);
+            }
+        };
+
         ReadableProcess.prototype.deleteActor = function (actor) {
             let tasksToBeDeleted = this.getTasksByActor(actor);
             let index = this.actors.indexOf(actor);

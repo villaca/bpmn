@@ -140,7 +140,7 @@
                         <br/>
                         <br/>
 
-                        <span>Comments:</span>
+                        <span>Comentários:</span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
                             <button class="btn btn-default pull-right orange-button" ng-click="openComments(readableTask)"><i class="material-icons">add</i></button>
@@ -264,31 +264,35 @@
         <div class="col-md-4 well well-lg " id="disabled-activities">
 
 		<div id="inner-disabled">
-                <h2>Disabled Activities:</h2>
+                <h2>Tarefas desabilitadas:</h2>
                 <button class="btn btn-primary pull-right disabledToggler orange-button" type="button" status="hidden">
-                    Show Disabled Tasks
+                    Mostrar tarefas desabilitadas
 				</button>
 
                 <div class="tasks" ng-repeat="readableTask in readableProcess.getDisabledTasks()">
                     <div class="disabled-tasks">
-                        <h3>Task {{$index + 1}} </h3>
+                        <h3>Tarefa {{$index + 1}} </h3>
 
-                        <span>Task actor:</span>
-                        <span ng-if="readableTask.getActor(0)" ng-repeat="actor in readableTask.getAllActor()">
-                            {{ actor }},  </span>
-                        <span ng-if="!readableTask.getActor(0)"> No Actors! </span>
+                        <span>Ator:</span>
+                        <span ng-if="readableTask.getActor(0)"> {{ readableTask.getActor() }} </span>
+                        <span ng-if="!readableTask.getActor(0)"> Nenhum ator! </span>
 
                         <br/>
 
-                        <span>Task Definition :</span>
+                        <span>Definição da tarefa :</span>
                         <span>{{ readableTask.getDefinition() }}</span>
 
                         <br/>
 
-                        <span>Comments:</span>
-                        <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
-                            {{ comment }}, </span>
-                        <span ng-if="!readableTask.getComment(0)"> No comments! </span>
+                        <span>Comentários:</span>
+                        <div ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
+                            <span>{{ comment.getText() }} </span> <br>
+                        </div>
+                        <span ng-if="!readableTask.getComment(0)"> Nenhum comentário! </span>
+
+                        <button class="btn btn-warning orange-button" ng-click="activateTask(readableProcess, readableTask)">
+                            Reabilitar Tarefa
+                        </button>
 
                     </div>
                 </div>
