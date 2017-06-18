@@ -248,9 +248,9 @@ angular
                 taskIndex++;
                 let actor = task.getActor(0);
                 if((actor == null) || (actor == "")){
-                    actor = "No actors!";
+                    actor = "Nenhum ator!";
                 }
-                let comment = task.getComment(0);
+                let comments = task.getAllComment();
                 context.fillStyle = "#FFFFFF";
 
                 context.beginPath();
@@ -284,38 +284,42 @@ angular
                     arrow(context, coordinateX + 10 + taskWidth, coordinateY + taskHeight/2 + 5);
                 }
 
+                for(let comment of comments){
+                    if((comment != null) && (comment.getText() != "")){
+                        coordinateY += taskHeight + spaceBetweenBoxes;
+                        context.beginPath();
+                        context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
+                        context.lineTo(coordinateX + actorWidth/2, coordinateY);
+                        context.stroke();
+                        context.closePath();
 
-                if((comment != null) && (comment.getText() != "")){
-                    coordinateY += taskHeight + spaceBetweenBoxes;
-                    context.beginPath();
-                    context.moveTo(coordinateX + actorWidth/2, coordinateY - spaceBetweenBoxes);
-                    context.lineTo(coordinateX + actorWidth/2, coordinateY);
-                    context.stroke();
-                    context.closePath();
+                        var commentText = "";
+                        if(comment.getType() == "rule"){
+                            context.fillStyle = "#1FFFD1";
+                            commentText = "Regra: " + comment.getText();
+                        }
+                        if(comment.getType() == "flux"){
+                            context.fillStyle = "#FFFFFF";
+                            context.setLineDash([3,3]);
+                            commentText = comment.getText();
+                        }
+                        if(comment.getType() == "remark"){
+                            context.fillStyle = "#25FF63";
+                            commentText = comment.getText();
+                        }
+                        context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
+                        context.fillRect(coordinateX, coordinateY, commentWidth, commentHeight);
 
-                    var commentText = "";
-                    if(comment.getType() == "rule"){
-                        context.fillStyle = "#1FFFD1";
-                        commentText = "Regra: " + comment.getText();
+                        context.setLineDash([]);
+                        context.fillStyle = "#111111";
+                        //context.fillText(comment, coordinateX + 10, coordinateY + 15);
+                        this.wrapText(context, commentText, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
+
                     }
-                    if(comment.getType() == "flux"){
-                        context.fillStyle = "#FFFFFF";
-                        context.setLineDash([3,3]);
-                        commentText = comment.getText();
-                    }
-                    if(comment.getType() == "remark"){
-                        context.fillStyle = "#25FF63";
-                        commentText = comment.getText();
-                    }
-                    context.strokeRect(coordinateX, coordinateY, commentWidth, commentHeight);
-                    context.fillRect(coordinateX, coordinateY, commentWidth, commentHeight);
 
-                    context.setLineDash([]);
-                    context.fillStyle = "#111111";
-                    //context.fillText(comment, coordinateX + 10, coordinateY + 15);
-                    this.wrapText(context, commentText, coordinateX + 10, coordinateY + 15, maxTextWidth, textHeight);
-
+                    coordinateY += commentHeight - taskHeight;
                 }
+
 
                 coordinateY = 50;
                 coordinateX += 150
