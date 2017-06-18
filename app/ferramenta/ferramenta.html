@@ -117,7 +117,7 @@
 
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
-                            <button class="btn btn-default pull-right orange-button" ng-click="openDefinition(readableTask)"><i class="material-icons">add</i></button>
+                            <button class="btn btn-default pull-right orange-button" ng-click="openDefinition(readableTask)"><i class="material-icons">edit</i></button>
 
                             <script type="text/ng-template" id="myModalContentDefinition.html">
                                 <div class="modal-window">
@@ -141,9 +141,6 @@
                         <br/>
 
                         <span>Comments:</span>
-                        <span ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
-                            {{ comment.getText() }}, </span>
-                        <span ng-if="!readableTask.getComment(0)">Nenhum comentário</span>
 
                         <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
                             <button class="btn btn-default pull-right orange-button" ng-click="openComments(readableTask)"><i class="material-icons">add</i></button>
@@ -170,6 +167,50 @@
                                 </div>
                             </script>
                         </div>
+
+                        <br>
+                        <div ng-if="readableTask.getComment(0)" ng-repeat="comment in readableTask.getAllComment()">
+                            <br>
+                            <div class="commentBlock">
+
+                                <span ng-if="comment.getType() == 'rule'">Tipo: Regra</span>
+                                <span ng-if="comment.getType() == 'flux'">Tipo: Fluxo</span>
+                                <span ng-if="comment.getType() == 'remark'">Tipo: Observação</span>
+                                <br>
+                                <span class="">{{ comment.getText() }} </span>
+
+
+                                <div ng-controller="ModalCtrl as $ctrl" class="modal-demo">
+                                    <button class="btn btn-default pull-right orange-button" ng-click="changeComment(readableTask, comment)"><i class="material-icons">edit</i></button>
+
+                                    <script type="text/ng-template" id="myModalChangeComment.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="modal-title-change-comment">Editar comentário</h3>
+                                        </div>
+                                        <div class="modal-body" id="modal-body-change-comment">
+                                            <div class="input-group">
+                                                <span class='input-group-addon'><small>Selecione o tipo de comentário:</small></span>
+                                                <select name='comment-type' class='form-control' id='change-comment-type-select' ng-model="changeCommentType">
+                                                    <option value='rule'>Regra</option>
+                                                    <option value='flux'>Fluxo</option>
+                                                    <option value='remark'>Observação</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <input type="text" ng-model="changeCommentText">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary orange-button" type="button" ng-click="$ctrl.change()">OK</button>
+                                            <button class="btn btn-warning orange-button" type="button" ng-click="$ctrl.cancel()">Cancelar</button>
+                                        </div>
+                                    </script>
+                                </div>
+
+                                <hr>
+                            </div>
+
+                        </div>
+                        <span ng-if="!readableTask.getComment(0)">Nenhum comentário</span>
 
                         <br/>
                         <br/>

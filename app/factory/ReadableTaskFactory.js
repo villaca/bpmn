@@ -29,8 +29,19 @@ angular
         ReadableTask.prototype.getAllComment = function () {
             return this.comment;
         }
+        
         ReadableTask.prototype.getComment = function (index) {
             return this.comment[index];
+        }
+        
+        ReadableTask.prototype.setComment = function (newComment, oldComment) {
+            let index = this.comment.indexOf(oldComment);
+
+            if (index != -1) {
+                this.comment[index] = newComment;
+            }
+
+
         }
 
         ReadableTask.prototype.getDefinition = function () {

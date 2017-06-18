@@ -492,7 +492,15 @@ a:hover {
 
 
 
+.commentBlock span{
+    position: relative;
+    top: 31px;
+}
 
+.commentBlock hr{
+    position: relative;
+    top: 50px;
+}
 
 
 

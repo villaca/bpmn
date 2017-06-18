@@ -120,7 +120,7 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
     $ctrl.animationsEnabled = true;
 
 
-    $scope.openActorName = function (readableProcess, actor,parentSelector) {
+    $scope.openActorName = function (readableProcess, actor, parentSelector) {
 
         var parentElem = parentSelector ?
             angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -141,6 +141,39 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
                     return readableProcess;
                 }
             }
+        });
+    };
+
+    $scope.changeComment = function (readableTask, comment, parentSelector) {
+
+        var parentElem = parentSelector ?
+            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+
+        $scope.oldComment = comment;
+        $scope.changeCommentType = comment.getType();
+        $scope.changeCommentText = comment.getText();
+
+
+        var modalInstance = $uibModal.open({
+            scope: $scope,
+            animation: $ctrl.animationsEnabled,
+            ariaLabelledBy: 'modal-title-change-comment',
+            ariaDescribedBy: 'modal-body-change-comment',
+            templateUrl: 'myModalChangeComment.html',
+            controller: 'TaskModalInstanceCtrl',
+            controllerAs: '$ctrl',
+            appendTo: parentElem,
+            resolve: {
+                readableTask: function () {
+                    return readableTask;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (newComment) {
+            $scope.newComment = newComment;
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
         });
     };
 
@@ -242,7 +275,6 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
         });
     };
 
-
     $ctrl.toggleAnimation = function () {
         $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
     };
@@ -253,7 +285,7 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
 
     $scope.newActor = null;
     $scope.newDefinition = null;
-    $scope.commentType = null;
+    $scope.commentType = 'remark';
     $scope.newComment = null;
 
     $ctrl.ok = function (thingToAdd) {
@@ -265,11 +297,17 @@ angular.module('myApp.ferramenta', ['ngRoute' , 'myApp.factories', "ui.bootstrap
             readableTask.addDefinition($scope.newDefinition);
         }
         if(thingToAdd == 'comment'){
-            console.log($scope.commentType);
             var comment = new Comment($scope.commentType, $scope.newComment);
             readableTask.addComment(comment);
         }
 
+
+        $uibModalInstance.close();
+    };
+
+    $ctrl.change = function () {
+        var comment = new Comment($scope.changeCommentType, $scope.changeCommentText);
+        readableTask.setComment(comment, $scope.oldComment);
 
         $uibModalInstance.close();
     };

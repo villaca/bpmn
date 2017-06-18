@@ -92,9 +92,6 @@ angular
         ReadableProcess.prototype.setActorName = function (newActorName, oldActorName) {
             let index = this.actors.indexOf(oldActorName);
 
-            //console.log(newActorName);
-            //console.log(oldActorName);
-
             if (index != -1) {
                 this.actors[index] = newActorName;
 
